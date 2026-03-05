@@ -90,11 +90,6 @@ const executiveTeam = [
 
 const salesTeam = [
   {
-    name: "Joseph Marcoguiseppe",
-    role: "Vice President of Marketing & Business Development",
-    image: "/images/team/joseph-marcoguiseppe.jpg",
-  },
-  {
     name: "Christian Nawrocki",
     role: "Licensed Agent & Benefits Specialist",
     image: "/images/team/christian-nawrocki.jpg",
@@ -103,6 +98,11 @@ const salesTeam = [
     name: "Virgil Glorioso",
     role: "Marketing & Social Media Liaison",
     image: "/images/team/virgil-glorioso.jpg",
+  },
+  {
+    name: "Joseph Marcoguiseppe",
+    role: "Vice President of Marketing & Business Development",
+    image: "/images/team/joseph-marcoguiseppe.jpg",
   },
   {
     name: "Robert Glorioso",
@@ -118,14 +118,19 @@ const salesTeam = [
 
 const serviceTeam = [
   {
-    name: "Kyle K.",
-    role: "Director of Customer Service & Support",
-    image: "/images/team/kyle-k.jpg",
+    name: "Doug H.",
+    role: "Customer Service Representative",
+    image: "/images/team/doug-h.jpg",
   },
   {
     name: "Matthew M.",
     role: "Lead Customer Service Representative",
     image: "/images/team/matthew-m.jpg",
+  },
+  {
+    name: "Kyle K.",
+    role: "Director of Customer Service & Support",
+    image: "/images/team/kyle-k.jpg",
   },
   {
     name: "Jimmy B.",
@@ -136,11 +141,6 @@ const serviceTeam = [
     name: "Jeneen C.",
     role: "Executive Assistant",
     image: "/images/team/jeneen-c.jpg",
-  },
-  {
-    name: "Doug H.",
-    role: "Customer Service Representative",
-    image: "/images/team/doug-h.jpg",
   },
   {
     name: "Toni B.",
