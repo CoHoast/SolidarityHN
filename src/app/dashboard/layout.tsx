@@ -32,6 +32,7 @@ const navigation = [
     children: [
       { name: 'Team Members', href: '/dashboard/settings/team' },
       { name: 'Users', href: '/dashboard/settings/users' },
+      { name: 'Rules Engine', href: '/dashboard/settings/rules' },
       { name: 'Payers', href: '/dashboard/settings/payers' },
       { name: 'System', href: '/dashboard/settings/system' },
     ]
