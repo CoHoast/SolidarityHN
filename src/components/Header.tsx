@@ -20,18 +20,18 @@ export function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          <Link href="/" className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center justify-between h-18 md:h-24">
+          <Link href="/" className="flex items-center gap-3">
             <Image 
               src="/images/shn-logo.png" 
-              alt="SHN" 
-              width={40} 
-              height={40}
-              className="w-8 h-8 sm:w-10 sm:h-10"
+              alt="Solidarity Health Network" 
+              width={56} 
+              height={56}
+              className="w-12 h-12 sm:w-14 sm:h-14"
             />
             <div className="hidden sm:block">
-              <span className="font-bold text-primary text-sm sm:text-base">Solidarity Health</span>
-              <span className="text-muted-foreground text-xs sm:text-sm block -mt-1">Network</span>
+              <span className="font-bold text-primary text-base sm:text-lg">Solidarity Health</span>
+              <span className="text-muted-foreground text-sm block -mt-0.5">Network</span>
             </div>
           </Link>
           
