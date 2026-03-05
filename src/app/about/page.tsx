@@ -54,45 +54,45 @@ const executiveTeam = [
     name: "Anne M. Glorioso",
     role: "President & CEO",
     image: "/images/team/anne-glorioso.jpg",
-    bio: "A high-energy professional with a 'can do' attitude, Anne has led SHN since its founding. With decades of experience in the healthcare and insurance industry, she brings keen insight to all the twists and turns along the way.",
-  },
-  {
-    name: "Alexandra (Allie) Szczepaniak",
-    role: "Chief Operating Officer",
-    image: "/images/team/alexandra-szczepaniak.jpg",
-    bio: "Alexandra is extremely detail-oriented and meticulous in her work. With her dedication, knowledge, and hard work, she ensures that SHN's operations run smoothly and efficiently.",
+    bio: "A high-energy professional with a 'can do' attitude, Anne has led SHN since its founding.",
   },
   {
     name: "Anthony J. Mangoni",
     role: "Founder / Chairman of the Board",
     image: "/images/team/anthony-mangoni.jpg",
-    bio: "As the visionary founder of SHN, Anthony laid the groundwork for a company built on integrity, service, and excellence in benefits administration.",
+    bio: "The visionary founder who built SHN on integrity, service, and excellence.",
+  },
+  {
+    name: "Alexandra (Allie) Szczepaniak",
+    role: "Chief Operating Officer",
+    image: "/images/team/alexandra-szczepaniak.jpg",
+    bio: "Detail-oriented and meticulous, ensuring SHN's operations run smoothly.",
   },
   {
     name: "Kathleen Caudill",
     role: "Senior Director of Operations",
     image: "/images/team/kathleen-caudill.jpg",
-    bio: "Kathleen brings extensive operational expertise to SHN, ensuring seamless day-to-day management and continuous improvement of our service delivery.",
-  },
-  {
-    name: "Marie Vitali",
-    role: "Account Manager & Certified Payroll Specialist",
-    image: "/images/team/marie-vitali.jpg",
-    bio: "Marie combines account management expertise with certified payroll knowledge to deliver comprehensive support to our clients.",
+    bio: "Extensive operational expertise ensuring seamless day-to-day management.",
   },
   {
     name: "Helen Crawford",
     role: "Senior Account Manager",
     image: "/images/team/helen-crawford.jpg",
-    bio: "Helen's extensive experience in account management ensures our clients receive personalized attention and exceptional service.",
+    bio: "Ensuring clients receive personalized attention and exceptional service.",
+  },
+  {
+    name: "Marie Vitali",
+    role: "Account Manager & Certified Payroll Specialist",
+    image: "/images/team/marie-vitali.jpg",
+    bio: "Combining account management with certified payroll expertise.",
   },
 ];
 
 const salesTeam = [
   {
-    name: "Christian Nawrocki",
-    role: "Licensed Agent & Benefits Specialist",
-    image: "/images/team/christian-nawrocki.jpg",
+    name: "Joseph Marcoguiseppe",
+    role: "Vice President of Marketing & Business Development",
+    image: "/images/team/joseph-marcoguiseppe.jpg",
   },
   {
     name: "Virgil Glorioso",
@@ -100,27 +100,27 @@ const salesTeam = [
     image: "/images/team/virgil-glorioso.jpg",
   },
   {
-    name: "Joseph Marcoguiseppe",
-    role: "Vice President of Marketing & Business Development",
-    image: "/images/team/joseph-marcoguiseppe.jpg",
-  },
-  {
-    name: "Robert Glorioso",
-    role: "Licensed Labor Liaison",
-    image: "/images/team/robert-glorioso.jpg",
+    name: "Christian Nawrocki",
+    role: "Licensed Agent & Benefits Specialist",
+    image: "/images/team/christian-nawrocki.jpg",
   },
   {
     name: "Mike Szczepaniak",
     role: "Licensed Agent & Project Manager",
     image: "/images/team/mike-szczepaniak.jpg",
   },
+  {
+    name: "Robert Glorioso",
+    role: "Licensed Labor Liaison",
+    image: "/images/team/robert-glorioso.jpg",
+  },
 ];
 
 const serviceTeam = [
   {
-    name: "Doug H.",
-    role: "Customer Service Representative",
-    image: "/images/team/doug-h.jpg",
+    name: "Kyle K.",
+    role: "Director of Customer Service & Support",
+    image: "/images/team/kyle-k.jpg",
   },
   {
     name: "Matthew M.",
@@ -128,24 +128,19 @@ const serviceTeam = [
     image: "/images/team/matthew-m.jpg",
   },
   {
-    name: "Kyle K.",
-    role: "Director of Customer Service & Support",
-    image: "/images/team/kyle-k.jpg",
-  },
-  {
     name: "Jimmy B.",
     role: "Quality Assurance & Customer Care",
     image: "/images/team/jimmy-b.jpg",
   },
   {
-    name: "Jeneen C.",
-    role: "Executive Assistant",
-    image: "/images/team/jeneen-c.jpg",
+    name: "Doug H.",
+    role: "Customer Service Representative",
+    image: "/images/team/doug-h.jpg",
   },
   {
-    name: "Toni B.",
+    name: "Dominic B.",
     role: "Customer Service Representative",
-    image: "/images/team/toni-b.jpg",
+    image: "/images/team/dominic-b.jpg",
   },
   {
     name: "Evan B.",
@@ -153,9 +148,14 @@ const serviceTeam = [
     image: "/images/team/evan-b.jpg",
   },
   {
-    name: "Dominic B.",
+    name: "Toni B.",
     role: "Customer Service Representative",
-    image: "/images/team/dominic-b.jpg",
+    image: "/images/team/toni-b.jpg",
+  },
+  {
+    name: "Jeneen C.",
+    role: "Executive Assistant",
+    image: "/images/team/jeneen-c.jpg",
   },
 ];
 
