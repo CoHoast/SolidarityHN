@@ -142,9 +142,7 @@ export default function DashboardLayout({
   };
   
   return (
-    <html lang="en">
-      <body className="bg-slate-50">
-        <div className="flex h-screen">
+    <div className="flex h-screen bg-slate-50">
           {/* Sidebar */}
           <aside className="w-72 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800 flex flex-col relative overflow-hidden">
             {/* Background decoration */}
@@ -331,7 +329,5 @@ export default function DashboardLayout({
             </main>
           </div>
         </div>
-      </body>
-    </html>
   );
 }
