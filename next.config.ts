@@ -5,6 +5,16 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: [
     "*.trycloudflare.com",
   ],
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'd30itml3t0pwpf.cloudfront.net',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+  },
 };
 
 export default nextConfig;

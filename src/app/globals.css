@@ -16,6 +16,7 @@
   
   /* Primary - Deep Navy Blue (Professional/Corporate) */
   --primary: oklch(0.35 0.12 250);
+  --primary-dark: oklch(0.25 0.12 250);
   --primary-foreground: oklch(0.99 0 0);
   
   /* Secondary - Warm Teal (Health/Wellness) */
@@ -49,6 +50,7 @@
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);

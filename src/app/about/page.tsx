@@ -2,183 +2,248 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 
-const team = [
-  {
-    name: "Anne Glorioso",
-    role: "President & CEO",
-    bio: "A high-energy professional with a 'can do' attitude, Anne has led SHN since its founding. With decades of experience in the healthcare and insurance industry, she brings keen insight to all the twists and turns along the way. Her commitment to excellence and attention to detail have been instrumental in building SHN's reputation for outstanding service.",
-    image: "/images/team-ceo.jpg",
-  },
-  {
-    name: "Alexandra Szczepaniak",
-    role: "Chief Operating Officer",
-    bio: "Alexandra is extremely detail-oriented and meticulous in her work. With her dedication, knowledge, and hard work, she ensures that SHN's operations run smoothly and efficiently. Her positive attitude and respectful approach have earned praise from clients and partners alike.",
-    image: "/images/team-coo.jpg",
-  },
-];
-
-const milestones = [
-  { year: "1989", title: "Founded", desc: "Solidarity Health Network established in Cleveland, Ohio" },
-  { year: "1995", title: "Growth", desc: "Expanded services to include retiree health care administration" },
-  { year: "2005", title: "Technology", desc: "Launched cutting-edge claims processing platform" },
-  { year: "2010", title: "500+ Clients", desc: "Reached milestone of serving over 500 organizations" },
-  { year: "2015", title: "Innovation", desc: "Introduced genetic testing compatibility services" },
-  { year: "Today", title: "35+ Years", desc: "Continuing our mission of excellence in benefits administration" },
+const stats = [
+  { value: "35+", label: "Years of Excellence" },
+  { value: "500+", label: "Organizations Served" },
+  { value: "100K+", label: "Members Supported" },
+  { value: "99%", label: "Client Retention" },
 ];
 
 const values = [
   {
-    icon: "🎯",
     title: "Excellence",
-    desc: "We strive for excellence in every interaction, every claim, and every service we provide.",
+    description: "We strive for excellence in every interaction, every claim, and every service we provide.",
+    icon: (
+      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+      </svg>
+    ),
   },
   {
-    icon: "🤝",
     title: "Partnership",
-    desc: "We view ourselves as an extension of your team, working alongside you toward shared goals.",
+    description: "We view ourselves as an extension of your team, working alongside you toward shared goals.",
+    icon: (
+      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+      </svg>
+    ),
   },
   {
-    icon: "💡",
     title: "Innovation",
-    desc: "We continuously invest in cutting-edge technology and processes to serve you better.",
+    description: "We continuously invest in cutting-edge technology and processes to serve you better.",
+    icon: (
+      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+      </svg>
+    ),
   },
   {
-    icon: "❤️",
     title: "Care",
-    desc: "We genuinely care about the well-being of the members and organizations we serve.",
+    description: "We genuinely care about the well-being of the members and organizations we serve.",
+    icon: (
+      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+      </svg>
+    ),
+  },
+];
+
+const executiveTeam = [
+  {
+    name: "Anne M. Glorioso",
+    role: "President & CEO",
+    image: "/images/team/anne-glorioso.jpg",
+    bio: "A high-energy professional with a 'can do' attitude, Anne has led SHN since its founding. With decades of experience in the healthcare and insurance industry, she brings keen insight to all the twists and turns along the way.",
+  },
+  {
+    name: "Alexandra (Allie) Szczepaniak",
+    role: "Chief Operating Officer",
+    image: "/images/team/alexandra-szczepaniak.jpg",
+    bio: "Alexandra is extremely detail-oriented and meticulous in her work. With her dedication, knowledge, and hard work, she ensures that SHN's operations run smoothly and efficiently.",
+  },
+  {
+    name: "Anthony J. Mangoni",
+    role: "Founder / Chairman of the Board",
+    image: "/images/team/anthony-mangoni.jpg",
+    bio: "As the visionary founder of SHN, Anthony laid the groundwork for a company built on integrity, service, and excellence in benefits administration.",
+  },
+  {
+    name: "Kathleen Caudill",
+    role: "Senior Director of Operations",
+    image: "/images/team/kathleen-caudill.jpg",
+    bio: "Kathleen brings extensive operational expertise to SHN, ensuring seamless day-to-day management and continuous improvement of our service delivery.",
+  },
+  {
+    name: "Marie Vitali",
+    role: "Account Manager & Certified Payroll Specialist",
+    image: "/images/team/marie-vitali.jpg",
+    bio: "Marie combines account management expertise with certified payroll knowledge to deliver comprehensive support to our clients.",
+  },
+  {
+    name: "Helen Crawford",
+    role: "Senior Account Manager",
+    image: "/images/team/helen-crawford.jpg",
+    bio: "Helen's extensive experience in account management ensures our clients receive personalized attention and exceptional service.",
+  },
+];
+
+const salesTeam = [
+  {
+    name: "Joseph Marcoguiseppe",
+    role: "Vice President of Marketing & Business Development",
+    image: "/images/team/joseph-marcoguiseppe.jpg",
+  },
+  {
+    name: "Christian Nawrocki",
+    role: "Licensed Agent & Benefits Specialist",
+    image: "/images/team/christian-nawrocki.jpg",
+  },
+  {
+    name: "Virgil Glorioso",
+    role: "Marketing & Social Media Liaison",
+    image: "/images/team/virgil-glorioso.jpg",
+  },
+  {
+    name: "Robert Glorioso",
+    role: "Licensed Labor Liaison",
+    image: "/images/team/robert-glorioso.jpg",
+  },
+  {
+    name: "Mike Szczepaniak",
+    role: "Licensed Agent & Project Manager",
+    image: "/images/team/mike-szczepaniak.jpg",
+  },
+];
+
+const serviceTeam = [
+  {
+    name: "Kyle K.",
+    role: "Director of Customer Service & Support",
+    image: "/images/team/kyle-k.jpg",
+  },
+  {
+    name: "Matthew M.",
+    role: "Lead Customer Service Representative",
+    image: "/images/team/matthew-m.jpg",
+  },
+  {
+    name: "Jimmy B.",
+    role: "Quality Assurance & Customer Care",
+    image: "/images/team/jimmy-b.jpg",
+  },
+  {
+    name: "Jeneen C.",
+    role: "Executive Assistant",
+    image: "/images/team/jeneen-c.jpg",
+  },
+  {
+    name: "Doug H.",
+    role: "Customer Service Representative",
+    image: "/images/team/doug-h.jpg",
+  },
+  {
+    name: "Toni B.",
+    role: "Customer Service Representative",
+    image: "/images/team/toni-b.jpg",
+  },
+  {
+    name: "Evan B.",
+    role: "Customer Service Representative",
+    image: "/images/team/evan-b.jpg",
+  },
+  {
+    name: "Dominic B.",
+    role: "Customer Service Representative",
+    image: "/images/team/dominic-b.jpg",
   },
 ];
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 md:h-20">
-            <Link href="/" className="flex items-center gap-2 sm:gap-3">
-              <Image 
-                src="/images/logo-icon.png" 
-                alt="SHN" 
-                width={40} 
-                height={40}
-                className="w-8 h-8 sm:w-10 sm:h-10"
-              />
-              <div className="hidden xs:block">
-                <span className="font-bold text-primary text-sm sm:text-base">Solidarity Health</span>
-                <span className="text-muted-foreground text-xs sm:text-sm block -mt-1">Network</span>
-              </div>
-            </Link>
-            
-            <button className="md:hidden p-2 text-muted-foreground hover:text-primary">
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
-            
-            <nav className="hidden md:flex items-center gap-6 lg:gap-8">
-              <Link href="/services" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Services</Link>
-              <Link href="/about" className="text-sm font-medium text-primary">About</Link>
-              <Link href="/#testimonials" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Testimonials</Link>
-              <Link href="/contact" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Contact</Link>
-            </nav>
-            <Button asChild className="hidden md:inline-flex">
-              <Link href="/contact">Get Started</Link>
-            </Button>
-          </div>
+    <div className="min-h-screen bg-white">
+      {/* Hero Section */}
+      <section className="relative py-20 lg:py-32 bg-gradient-to-br from-primary to-primary-dark overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <Image
+            src="/images/backgrounds/about-bg.jpg"
+            alt=""
+            fill
+            className="object-cover"
+          />
         </div>
-      </header>
-
-      {/* Hero */}
-      <section className="pt-24 md:pt-32 pb-12 md:pb-16 bg-gradient-to-b from-muted/50 to-white relative overflow-hidden">
-        <div 
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage: `url('/images/about-bg.jpg')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
-          <Badge variant="outline" className="mb-4">About Us</Badge>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 md:mb-6">
-            Your Trusted Partner in{" "}
-            <span className="text-primary">Total Benefits Solutions</span>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
+            Our Company
           </h1>
-          <p className="text-base md:text-xl text-muted-foreground max-w-3xl mx-auto">
-            Since 1989, Solidarity Health Network has been delivering personalized solutions 
-            that cater to the unique needs of each organization we serve.
+          <p className="text-xl text-white/80 max-w-3xl mx-auto">
+            From Hire to Retire: Your Complete Partner in Benefits Excellence
           </p>
         </div>
       </section>
 
-      {/* Mission */}
-      <section className="py-12 md:py-20">
+      {/* About Section */}
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <Badge variant="outline" className="mb-4">Our Mission</Badge>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-6">
-                Empowering Organizations, Enriching Lives
-              </h2>
-              <p className="text-base md:text-lg text-muted-foreground mb-6">
-                As a leading third-party administrator, benefits consultant, and full-service broker, 
-                we take pride in delivering a superior service model that empowers organizations 
-                with comprehensive and innovative benefit packages.
-              </p>
-              <p className="text-base md:text-lg text-muted-foreground mb-6">
-                Our mission is to provide personalized solutions that cater to the unique needs of 
-                each organization we serve. Through expert guidance, cutting-edge technology, and 
-                a focus on well-being, we strive to revolutionize the benefits experience.
-              </p>
-              <p className="text-base md:text-lg text-muted-foreground">
-                We help our clients attract and retain top talent while ensuring the well-being 
-                of their workforce – both during employment and after retirement.
-              </p>
+              <h2 className="text-sm font-semibold text-primary uppercase tracking-wide mb-3">About Us</h2>
+              <h3 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
+                Simplifying the Intricate Benefits Landscape Since 1989
+              </h3>
+              <div className="space-y-4 text-gray-600">
+                <p>
+                  At SHN we are here to simplify the intricate benefits landscape on your behalf. Our goal is to empower 
+                  you to effortlessly manage every aspect of employer-sponsored plans, ensuring seamless transitions into 
+                  group retiree coverage or navigate the complex space of corporate benefits packages.
+                </p>
+                <p>
+                  We understand the significance of addressing OPEB liabilities and the intricate balance it requires.
+                </p>
+                <p>
+                  Our hallmark lies in crafting custom benefit solutions that align with your unique requirements. With us, 
+                  you can rest assured knowing that your benefits are in capable hands, freeing you to focus on what truly 
+                  matters - enhancing the health, well-being, and satisfaction of your valued members.
+                </p>
+                <p className="font-semibold text-gray-900">
+                  At SHN, we are all about results. With our in-depth guidance and hands-on approach, our clients witness 
+                  a transformational impact on their bottom line - a substantial up to 50% savings.
+                </p>
+              </div>
             </div>
-            
-            <div className="grid grid-cols-2 gap-4">
-              <Card className="text-center p-6">
-                <div className="text-4xl md:text-5xl font-bold text-primary">35+</div>
-                <div className="text-sm md:text-base text-muted-foreground mt-2">Years of Excellence</div>
-              </Card>
-              <Card className="text-center p-6">
-                <div className="text-4xl md:text-5xl font-bold text-primary">500+</div>
-                <div className="text-sm md:text-base text-muted-foreground mt-2">Organizations Served</div>
-              </Card>
-              <Card className="text-center p-6">
-                <div className="text-4xl md:text-5xl font-bold text-primary">100K+</div>
-                <div className="text-sm md:text-base text-muted-foreground mt-2">Members Supported</div>
-              </Card>
-              <Card className="text-center p-6">
-                <div className="text-4xl md:text-5xl font-bold text-primary">99%</div>
-                <div className="text-sm md:text-base text-muted-foreground mt-2">Client Retention</div>
-              </Card>
+            <div className="relative">
+              <div className="grid grid-cols-2 gap-4">
+                {stats.map((stat) => (
+                  <div key={stat.label} className="bg-gray-50 rounded-2xl p-6 text-center">
+                    <div className="text-3xl sm:text-4xl font-bold text-primary mb-1">{stat.value}</div>
+                    <div className="text-sm text-gray-600">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Values */}
-      <section className="py-12 md:py-20 bg-muted/30">
+      {/* Values Section */}
+      <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10 md:mb-16">
-            <Badge variant="outline" className="mb-4">Our Values</Badge>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">
+          <div className="text-center mb-16">
+            <h2 className="text-sm font-semibold text-primary uppercase tracking-wide mb-3">Our Values</h2>
+            <p className="text-3xl sm:text-4xl font-bold text-gray-900">
               What Drives Us Every Day
-            </h2>
+            </p>
           </div>
           
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value) => (
-              <Card key={value.title} className="text-center hover:shadow-lg transition-shadow">
-                <CardContent className="p-6">
-                  <div className="text-4xl md:text-5xl mb-4">{value.icon}</div>
-                  <h3 className="font-semibold text-lg text-foreground mb-2">{value.title}</h3>
-                  <p className="text-sm text-muted-foreground">{value.desc}</p>
+              <Card key={value.title} className="text-center p-6">
+                <CardContent className="pt-4">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 text-primary mb-4">
+                    {value.icon}
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{value.title}</h3>
+                  <p className="text-sm text-gray-600">{value.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -186,37 +251,81 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Timeline */}
-      <section className="py-12 md:py-20">
+      {/* Team Section */}
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10 md:mb-16">
-            <Badge variant="outline" className="mb-4">Our Journey</Badge>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">
-              35+ Years of Building Trust
-            </h2>
+          <div className="text-center mb-16">
+            <h2 className="text-sm font-semibold text-primary uppercase tracking-wide mb-3">Our Team</h2>
+            <p className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              The People Behind SHN
+            </p>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              At Solidarity Health Network, our journey is all about people - the driving force behind every experience we craft.
+              We come to work each day, driven by the opportunity to tackle your most complex benefits challenges head-on.
+            </p>
           </div>
-          
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-primary/20 transform md:-translate-x-1/2" />
-            
-            <div className="space-y-8 md:space-y-12">
-              {milestones.map((milestone, idx) => (
-                <div key={milestone.year} className={`relative flex items-center gap-4 md:gap-8 ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-                  <div className={`flex-1 ${idx % 2 === 0 ? 'md:text-right' : 'md:text-left'} pl-12 md:pl-0`}>
-                    <Card className="inline-block">
-                      <CardContent className="p-4 md:p-6">
-                        <div className="text-2xl md:text-3xl font-bold text-primary mb-1">{milestone.year}</div>
-                        <div className="font-semibold text-foreground">{milestone.title}</div>
-                        <div className="text-sm text-muted-foreground mt-1">{milestone.desc}</div>
-                      </CardContent>
-                    </Card>
+
+          {/* Executive Team */}
+          <div className="mb-16">
+            <h3 className="text-xl font-semibold text-gray-900 mb-8 text-center">Executive & Account Management Team</h3>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {executiveTeam.map((member) => (
+                <Card key={member.name} className="overflow-hidden">
+                  <div className="aspect-[4/3] relative bg-gray-100">
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      className="object-cover"
+                    />
                   </div>
-                  
-                  {/* Timeline dot */}
-                  <div className="absolute left-4 md:left-1/2 w-4 h-4 bg-primary rounded-full transform -translate-x-1/2 border-4 border-white shadow" />
-                  
-                  <div className="hidden md:block flex-1" />
+                  <CardContent className="p-6">
+                    <h4 className="text-lg font-semibold text-gray-900">{member.name}</h4>
+                    <p className="text-sm text-primary font-medium mb-3">{member.role}</p>
+                    <p className="text-sm text-gray-600">{member.bio}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          {/* Sales Team */}
+          <div className="mb-16">
+            <h3 className="text-xl font-semibold text-gray-900 mb-8 text-center">Sales & Marketing Team</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+              {salesTeam.map((member) => (
+                <div key={member.name} className="text-center">
+                  <div className="aspect-square relative bg-gray-100 rounded-2xl overflow-hidden mb-4">
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <h4 className="font-semibold text-gray-900 text-sm">{member.name}</h4>
+                  <p className="text-xs text-gray-500">{member.role}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Service Team */}
+          <div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-8 text-center">Service & Customer Care Team</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
+              {serviceTeam.map((member) => (
+                <div key={member.name} className="text-center">
+                  <div className="aspect-square relative bg-gray-100 rounded-xl overflow-hidden mb-3">
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <h4 className="font-semibold text-gray-900 text-xs">{member.name}</h4>
+                  <p className="text-xs text-gray-500 leading-tight">{member.role}</p>
                 </div>
               ))}
             </div>
@@ -224,117 +333,20 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team */}
-      <section className="py-12 md:py-20 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10 md:mb-16">
-            <Badge variant="outline" className="mb-4">Leadership</Badge>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">
-              Meet Our Team
-            </h2>
-            <p className="text-base md:text-lg text-muted-foreground mt-4 max-w-2xl mx-auto">
-              Our leadership brings decades of combined experience in healthcare, insurance, 
-              and benefits administration.
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {team.map((member) => (
-              <Card key={member.name} className="overflow-hidden hover:shadow-lg transition-shadow">
-                <div className="aspect-[4/3] bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-                  <div className="text-center text-white p-8">
-                    <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-primary/30 backdrop-blur-sm mx-auto flex items-center justify-center mb-4">
-                      <span className="text-4xl md:text-5xl font-bold text-primary">
-                        {member.name.split(' ').map(n => n[0]).join('')}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-bold text-foreground">{member.name}</h3>
-                  <div className="text-primary font-medium mb-3">{member.role}</div>
-                  <p className="text-sm md:text-base text-muted-foreground">{member.bio}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-12 md:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-br from-secondary to-secondary/80 rounded-2xl md:rounded-3xl p-8 md:p-12 lg:p-16 text-center text-white">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-              Together, Let&apos;s Build a Brighter Future
-            </h2>
-            <p className="text-base md:text-xl text-white/80 mb-6 md:mb-8 max-w-2xl mx-auto">
-              For your employees and your business. Partner with Solidarity Health Network 
-              and experience the difference.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-white text-secondary hover:bg-white/90" asChild>
-                <Link href="/contact">Schedule a Consultation</Link>
-              </Button>
-              <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10" asChild>
-                <Link href="/services">Explore Services</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-foreground text-white py-12 md:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
-            <div className="sm:col-span-2 lg:col-span-2">
-              <div className="flex items-center gap-3 mb-4">
-                <Image 
-                  src="/images/logo-icon.png" 
-                  alt="SHN" 
-                  width={40} 
-                  height={40}
-                  className="w-10 h-10 bg-white rounded-lg p-1"
-                />
-                <div>
-                  <span className="font-bold text-white">Solidarity Health</span>
-                  <span className="text-white/60 text-sm block -mt-1">Network</span>
-                </div>
-              </div>
-              <p className="text-white/60 max-w-md text-sm md:text-base">
-                Your trusted partner in total benefits solutions since 1989. 
-                Together, let&apos;s build a brighter future for your employees and your business.
-              </p>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Quick Links</h4>
-              <ul className="space-y-2 text-sm md:text-base text-white/60">
-                <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
-                <li><Link href="/services" className="hover:text-white transition-colors">Services</Link></li>
-                <li><Link href="/about" className="hover:text-white transition-colors">About</Link></li>
-                <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Contact</h4>
-              <div className="space-y-2 text-sm md:text-base text-white/60">
-                <p>Solidarity Health Network</p>
-                <p>4853 Galaxy Parkway, Suite K</p>
-                <p>Cleveland, OH 44128</p>
-              </div>
-            </div>
-          </div>
-          
-          <Separator className="my-8 bg-white/10" />
-          
-          <p className="text-center text-white/40 text-sm">
-            © {new Date().getFullYear()} Solidarity Health Network. All rights reserved.
+      {/* CTA Section */}
+      <section className="py-20 bg-primary">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+            Ready to Transform Your Benefits?
+          </h2>
+          <p className="text-lg text-white/80 mb-8">
+            Join hundreds of organizations who trust SHN with their benefits administration.
           </p>
+          <Button size="lg" variant="secondary" asChild>
+            <Link href="/contact">Contact Us Today</Link>
+          </Button>
         </div>
-      </footer>
+      </section>
     </div>
   );
 }

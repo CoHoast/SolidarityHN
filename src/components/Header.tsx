@@ -5,18 +5,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-interface HeaderProps {
-  currentPage?: "home" | "services" | "about" | "contact";
-}
-
-export function Header({ currentPage }: HeaderProps) {
+export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { href: "/services", label: "Services", key: "services" },
-    { href: "/about", label: "About", key: "about" },
-    { href: "/#testimonials", label: "Testimonials", key: "testimonials" },
-    { href: "/contact", label: "Contact", key: "contact" },
+    { href: "/about", label: "Our Company" },
+    { href: "/services", label: "Services" },
+    { href: "/approach", label: "Our Approach" },
+    { href: "/impact", label: "Our Impact" },
+    { href: "/partnerships", label: "Partnerships" },
+    { href: "/contact", label: "Contact" },
   ];
 
   return (
@@ -25,13 +23,13 @@ export function Header({ currentPage }: HeaderProps) {
         <div className="flex items-center justify-between h-16 md:h-20">
           <Link href="/" className="flex items-center gap-2 sm:gap-3">
             <Image 
-              src="/images/logo-icon.png" 
+              src="/images/shn-logo.png" 
               alt="SHN" 
               width={40} 
               height={40}
               className="w-8 h-8 sm:w-10 sm:h-10"
             />
-            <div className="hidden xs:block">
+            <div className="hidden sm:block">
               <span className="font-bold text-primary text-sm sm:text-base">Solidarity Health</span>
               <span className="text-muted-foreground text-xs sm:text-sm block -mt-1">Network</span>
             </div>
@@ -39,7 +37,7 @@ export function Header({ currentPage }: HeaderProps) {
           
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden p-2 text-muted-foreground hover:text-primary"
+            className="lg:hidden p-2 text-muted-foreground hover:text-primary"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -55,39 +53,31 @@ export function Header({ currentPage }: HeaderProps) {
           </button>
           
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+          <nav className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => (
               <Link 
-                key={link.key}
+                key={link.href}
                 href={link.href} 
-                className={`text-sm font-medium transition-colors ${
-                  currentPage === link.key 
-                    ? "text-primary" 
-                    : "text-muted-foreground hover:text-primary"
-                }`}
+                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
               >
                 {link.label}
               </Link>
             ))}
           </nav>
-          <Button asChild className="hidden md:inline-flex">
+          <Button asChild className="hidden lg:inline-flex">
             <Link href="/contact">Get Started</Link>
           </Button>
         </div>
         
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t bg-white absolute left-0 right-0 top-full shadow-lg">
+          <div className="lg:hidden border-t bg-white absolute left-0 right-0 top-full shadow-lg">
             <nav className="flex flex-col p-4 space-y-1">
               {navLinks.map((link) => (
                 <Link
-                  key={link.key}
+                  key={link.href}
                   href={link.href}
-                  className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                    currentPage === link.key 
-                      ? "bg-primary/10 text-primary" 
-                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                  }`}
+                  className="px-4 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.label}

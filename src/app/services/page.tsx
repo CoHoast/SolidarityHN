@@ -1,191 +1,150 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
+import { Card, CardContent } from "@/components/ui/card";
 
-const serviceCategories = [
+// Four Core Solutions
+const coreSolutions = [
   {
-    title: "Benefit Administration",
-    description: "Comprehensive management of your employee benefit programs with precision and care.",
-    icon: "📋",
-    services: [
-      { name: "Benefit Administration", desc: "Full-service management of all employee benefit programs" },
-      { name: "Billing & Invoicing", desc: "Accurate, timely billing and payment processing" },
-      { name: "Eligibility Management", desc: "Real-time eligibility tracking and verification" },
-      { name: "Benefit Audits", desc: "Comprehensive audits to ensure accuracy and compliance" },
-      { name: "Fringe Benefit Administration", desc: "Management of supplemental employee benefits" },
-    ]
+    name: "BenefitsConnect™",
+    tagline: "Streamlined Benefit Management",
+    description: "At SHN, we revolutionize your benefit management journey. From meticulous benefit planning to seamless implementation, smooth transitions, and a successful benefit launch, we've got you covered. Our Eligibility Services ensure accuracy and efficiency, while our Benefits Consulting brings strategic insights to the table.",
+    features: ["Benefit Planning & Design", "Implementation Support", "Eligibility Services", "Benefits Consulting", "Transition Management", "Launch Support"],
+    icon: (
+      <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+      </svg>
+    ),
   },
   {
-    title: "Health Plans",
-    description: "Flexible health plan solutions designed to meet your organization's unique needs.",
-    icon: "🏥",
-    services: [
-      { name: "Self-Funded Plans", desc: "Custom solutions that put you in control of healthcare costs" },
-      { name: "Fully Insured Plans", desc: "Traditional fully insured plan administration and support" },
-      { name: "Retiree Health Care", desc: "Specialized programs for your retired workforce" },
-      { name: "Dental & Vision", desc: "Complete dental and vision benefit administration" },
-      { name: "ACA Mandates", desc: "Full compliance with Affordable Care Act requirements" },
-    ]
+    name: "BenefitsFlex™",
+    tagline: "Tailored Flexibility at Its Best",
+    description: "As your trusted Third-Party Administrator (TPA), we are committed to delivering solutions that cater to your unique needs. Say goodbye to hearing \"We can't do that\" because with BenefitsFlex™, customization knows no bounds. Whether you're a large corporation or a growing business, you'll receive a tailored experience.",
+    features: ["Custom TPA Solutions", "Compliance Expertise", "Strong Carrier Relationships", "Scalable Plans", "Flexible Administration", "Personalized Service"],
+    icon: (
+      <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+      </svg>
+    ),
   },
   {
-    title: "Claims & Processing",
-    description: "Efficient, accurate claims processing with industry-leading turnaround times.",
-    icon: "📊",
-    services: [
-      { name: "Claims Processing", desc: "Efficient, accurate processing with rapid turnaround" },
-      { name: "Prescription Drug Benefits", desc: "Comprehensive drug benefit management" },
-      { name: "Genetic Testing Compatibility", desc: "Testing for prescription drug compatibility" },
-      { name: "Retiree Drug Subsidy Administration", desc: "RDS program management and compliance" },
-      { name: "Retiree Drug Subsidy Recovery", desc: "Post-reconciliation subsidy recovery services" },
-    ]
+    name: "BenefitsSupport™",
+    tagline: "Advocacy and Exceptional Service",
+    description: "We are your partner in advocating for retirees, employees, trustees, plan sponsors, and carriers alike. With a dedicated account advocate at your service, you can count on us to provide unwavering support. Our US-based customer care line is available Monday through Friday.",
+    features: ["Dedicated Account Advocate", "US-Based Call Center", "Audit Support", "Renewal Assistance", "Member Advocacy", "Carrier Relations"],
+    icon: (
+      <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+      </svg>
+    ),
   },
   {
-    title: "Retirement Services",
-    description: "Complete retirement benefit administration for your workforce.",
-    icon: "🎯",
-    services: [
-      { name: "Annuity Administration", desc: "Full-service annuity program management" },
-      { name: "Pension Administration", desc: "Comprehensive pension plan administration" },
-      { name: "Retiree Benefits", desc: "Continued benefit support for retired employees" },
-    ]
+    name: "BenefitsBrief™",
+    tagline: "Education and Compliance Excellence",
+    description: "We are your dedicated partner committed to a steadfast approach to compliance and education. Our commitment to doing right by you is unwavering. Retirees are never overlooked, and our solutions are designed to withstand scrutiny.",
+    features: ["Compliance Resources", "Educational Materials", "Regulatory Updates", "Best Practices", "Training Support", "Documentation"],
+    icon: (
+      <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      </svg>
+    ),
+  },
+];
+
+// Client Services
+const clientServices = [
+  {
+    title: "Retiree Group Benefit Solutions",
+    description: "We understand the importance of supporting your employees not only during their active employment but also as they transition into retirement. Our Retiree Group Benefit Solutions are designed to offer comprehensive and customized packages that cater to the unique needs of retirees.",
+    features: ["Healthcare Plans", "Supplemental Coverage", "Medicare Advantage", "Drug Benefits"],
   },
   {
-    title: "Support Services",
-    description: "USA-based support ensuring your members always have help when they need it.",
-    icon: "📞",
-    services: [
-      { name: "Call Center Services", desc: "USA-based support for your members" },
-      { name: "Member Services", desc: "Dedicated support for plan participants" },
-      { name: "Employer Support", desc: "Expert guidance for HR teams and administrators" },
-    ]
+    title: "Self-Funded Group Benefit Solutions",
+    description: "As the healthcare landscape continues to evolve, self-funded benefit plans have become an attractive option for many organizations seeking more control over their employee benefit programs. Our Self-Funded Group Benefit Solutions provide flexible and cost-effective plans.",
+    features: ["Custom Plan Design", "Cost Control", "Risk Management", "Claims Analysis"],
   },
+  {
+    title: "Level-Funded Group Benefit Solutions",
+    description: "Finding the right balance between traditional fully-insured plans and self-funding can be challenging. Our Level-Funded Group Benefit Solutions offer the best of both worlds by providing predictable monthly payments with the potential for cost savings.",
+    features: ["Predictable Costs", "Potential Refunds", "Stop-Loss Protection", "Flexibility"],
+  },
+  {
+    title: "Administration Services & Support",
+    description: "Managing employee benefits can be complex and time-consuming. SHN takes the burden off your shoulders with our comprehensive Administration Services & Support, ensuring a seamless experience for both employers and employees.",
+    features: ["Claims Processing", "Enrollment Assistance", "Compliance Management", "Employee Education"],
+  },
+];
+
+// All Services
+const allServices = [
+  { category: "Benefit Administration", items: ["Benefit Administration", "Billing & Invoicing", "Eligibility Management", "Benefit Audits", "Fringe Benefit Administration"] },
+  { category: "Health Plans", items: ["Self-Funded Plans", "Fully Insured Plans", "Retiree Health Care", "Dental & Vision", "ACA Mandates"] },
+  { category: "Claims & Processing", items: ["Claims Processing", "Prescription Drug Benefits", "Genetic Testing Compatibility", "Retiree Drug Subsidy Administration", "Retiree Drug Subsidy Recovery"] },
+  { category: "Retirement Services", items: ["Annuity Administration", "Pension Administration", "Retiree Benefits"] },
+  { category: "Support Services", items: ["Call Center Services (USA-Based)", "Member Services", "Employer Support"] },
 ];
 
 export default function ServicesPage() {
   return (
-    <div className="min-h-screen">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 md:h-20">
-            <Link href="/" className="flex items-center gap-2 sm:gap-3">
-              <Image 
-                src="/images/logo-icon.png" 
-                alt="SHN" 
-                width={40} 
-                height={40}
-                className="w-8 h-8 sm:w-10 sm:h-10"
-              />
-              <div className="hidden xs:block">
-                <span className="font-bold text-primary text-sm sm:text-base">Solidarity Health</span>
-                <span className="text-muted-foreground text-xs sm:text-sm block -mt-1">Network</span>
-              </div>
-            </Link>
-            
-            <button className="md:hidden p-2 text-muted-foreground hover:text-primary">
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
-            
-            <nav className="hidden md:flex items-center gap-6 lg:gap-8">
-              <Link href="/services" className="text-sm font-medium text-primary">Services</Link>
-              <Link href="/about" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">About</Link>
-              <Link href="/#testimonials" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Testimonials</Link>
-              <Link href="/contact" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Contact</Link>
-            </nav>
-            <Button asChild className="hidden md:inline-flex">
-              <Link href="/contact">Get Started</Link>
-            </Button>
-          </div>
-        </div>
-      </header>
-
-      {/* Hero */}
-      <section className="pt-24 md:pt-32 pb-12 md:pb-16 bg-gradient-to-b from-muted/50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Badge variant="outline" className="mb-4">Our Services</Badge>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 md:mb-6">
-            Real Health Solutions,{" "}
-            <span className="text-secondary">Accessible For All</span>
+    <div className="min-h-screen bg-white">
+      {/* Hero Section */}
+      <section className="relative py-20 lg:py-32 bg-gradient-to-br from-primary to-primary-dark overflow-hidden">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
+            Our Services
           </h1>
-          <p className="text-base md:text-xl text-muted-foreground max-w-3xl mx-auto">
-            Comprehensive benefit administration and consulting services tailored to your 
-            organization&apos;s unique needs. We handle the complexity so you can focus on your people.
+          <p className="text-xl text-white/80 max-w-3xl mx-auto">
+            Real Health Solutions, Accessible For All. Comprehensive benefit administration 
+            and consulting services tailored to your organization's unique needs.
           </p>
         </div>
       </section>
 
-      {/* Services Grid */}
-      <section className="py-12 md:py-20">
+      {/* Four Core Solutions */}
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-12 md:space-y-20">
-            {serviceCategories.map((category, idx) => (
-              <div key={category.title} className={idx % 2 === 1 ? "" : ""}>
-                <div className="flex items-center gap-4 mb-6 md:mb-8">
-                  <span className="text-4xl md:text-5xl">{category.icon}</span>
-                  <div>
-                    <h2 className="text-2xl md:text-3xl font-bold text-foreground">{category.title}</h2>
-                    <p className="text-sm md:text-base text-muted-foreground mt-1">{category.description}</p>
-                  </div>
-                </div>
-                
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-                  {category.services.map((service) => (
-                    <Card key={service.name} className="group hover:shadow-lg transition-all hover:border-primary/50">
-                      <CardContent className="p-4 md:p-6">
-                        <div className="flex items-start gap-3">
-                          <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-primary/20 transition-colors">
-                            <svg className="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                            </svg>
-                          </div>
-                          <div>
-                            <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
-                              {service.name}
-                            </h3>
-                            <p className="text-sm text-muted-foreground mt-1">{service.desc}</p>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-                
-                {idx < serviceCategories.length - 1 && (
-                  <Separator className="mt-12 md:mt-20" />
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Us */}
-      <section className="py-12 md:py-20 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10 md:mb-16">
-            <Badge variant="outline" className="mb-4">Why SHN</Badge>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">
-              The SHN Difference
-            </h2>
+          <div className="text-center mb-16">
+            <h2 className="text-sm font-semibold text-primary uppercase tracking-wide mb-3">Four Core Solutions</h2>
+            <p className="text-3xl sm:text-4xl font-bold text-gray-900">
+              For All Your Benefit Needs
+            </p>
+            <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+              Our four cornerstones of excellence form the foundation of our business model, 
+              setting us apart as your trusted partner.
+            </p>
           </div>
           
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-            {[
-              { icon: "🎯", title: "Precision", desc: "Meticulous attention to detail in every claim and process" },
-              { icon: "⚡", title: "Speed", desc: "Industry-leading turnaround times on claims and inquiries" },
-              { icon: "🤝", title: "Partnership", desc: "We become an extension of your team, not just a vendor" },
-              { icon: "🇺🇸", title: "USA-Based", desc: "All our support staff are located right here in the USA" },
-            ].map((item) => (
-              <Card key={item.title} className="text-center">
-                <CardContent className="p-6">
-                  <div className="text-4xl mb-4">{item.icon}</div>
-                  <h3 className="font-semibold text-lg text-foreground mb-2">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground">{item.desc}</p>
+          <div className="space-y-8">
+            {coreSolutions.map((solution, index) => (
+              <Card key={solution.name} className={`overflow-hidden ${index % 2 === 0 ? '' : 'bg-gray-50'}`}>
+                <CardContent className="p-8 md:p-12">
+                  <div className="grid md:grid-cols-3 gap-8 items-start">
+                    <div className="md:col-span-2">
+                      <div className="flex items-center gap-4 mb-4">
+                        <div className="w-16 h-16 rounded-xl bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
+                          {solution.icon}
+                        </div>
+                        <div>
+                          <h3 className="text-2xl font-bold text-gray-900">{solution.name}</h3>
+                          <p className="text-primary font-medium">{solution.tagline}</p>
+                        </div>
+                      </div>
+                      <p className="text-gray-600 mb-6">{solution.description}</p>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-3">Key Features:</h4>
+                      <ul className="space-y-2">
+                        {solution.features.map((feature) => (
+                          <li key={feature} className="flex items-center gap-2 text-sm text-gray-600">
+                            <svg className="w-4 h-4 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             ))}
@@ -193,80 +152,84 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-12 md:py-20">
+      {/* Client Services */}
+      <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-primary rounded-2xl md:rounded-3xl p-8 md:p-12 lg:p-16 text-center text-white">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-              Ready to Transform Your Benefits?
-            </h2>
-            <p className="text-base md:text-xl text-white/80 mb-6 md:mb-8 max-w-2xl mx-auto">
-              Let&apos;s discuss how our comprehensive services can help your organization 
-              attract and retain top talent while controlling costs.
+          <div className="text-center mb-16">
+            <h2 className="text-sm font-semibold text-primary uppercase tracking-wide mb-3">Client Services</h2>
+            <p className="text-3xl sm:text-4xl font-bold text-gray-900">
+              Comprehensive Benefit Solutions
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-white text-primary hover:bg-white/90" asChild>
-                <Link href="/contact">Schedule a Consultation</Link>
-              </Button>
-              <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10" asChild>
-                <Link href="/about">Learn About Us</Link>
-              </Button>
-            </div>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            {clientServices.map((service) => (
+              <Card key={service.title} className="p-8">
+                <CardContent className="pt-0">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">{service.title}</h3>
+                  <p className="text-gray-600 mb-4">{service.description}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {service.features.map((feature) => (
+                      <span key={feature} className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/5 text-primary">
+                        {feature}
+                      </span>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-foreground text-white py-12 md:py-16">
+      {/* All Services */}
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
-            <div className="sm:col-span-2 lg:col-span-2">
-              <div className="flex items-center gap-3 mb-4">
-                <Image 
-                  src="/images/logo-icon.png" 
-                  alt="SHN" 
-                  width={40} 
-                  height={40}
-                  className="w-10 h-10 bg-white rounded-lg p-1"
-                />
-                <div>
-                  <span className="font-bold text-white">Solidarity Health</span>
-                  <span className="text-white/60 text-sm block -mt-1">Network</span>
-                </div>
-              </div>
-              <p className="text-white/60 max-w-md text-sm md:text-base">
-                Your trusted partner in total benefits solutions since 1989. 
-                Together, let&apos;s build a brighter future for your employees and your business.
-              </p>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Quick Links</h4>
-              <ul className="space-y-2 text-sm md:text-base text-white/60">
-                <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
-                <li><Link href="/services" className="hover:text-white transition-colors">Services</Link></li>
-                <li><Link href="/about" className="hover:text-white transition-colors">About</Link></li>
-                <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Contact</h4>
-              <div className="space-y-2 text-sm md:text-base text-white/60">
-                <p>Solidarity Health Network</p>
-                <p>4853 Galaxy Parkway, Suite K</p>
-                <p>Cleveland, OH 44128</p>
-              </div>
-            </div>
+          <div className="text-center mb-16">
+            <h2 className="text-sm font-semibold text-primary uppercase tracking-wide mb-3">Complete Service List</h2>
+            <p className="text-3xl sm:text-4xl font-bold text-gray-900">
+              Everything We Offer
+            </p>
           </div>
           
-          <Separator className="my-8 bg-white/10" />
-          
-          <p className="text-center text-white/40 text-sm">
-            © {new Date().getFullYear()} Solidarity Health Network. All rights reserved.
-          </p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {allServices.map((category) => (
+              <div key={category.category} className="bg-gray-50 rounded-2xl p-6">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                  </svg>
+                  {category.category}
+                </h3>
+                <ul className="space-y-2">
+                  {category.items.map((item) => (
+                    <li key={item} className="flex items-center gap-2 text-sm text-gray-600">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary"></div>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
-      </footer>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-primary">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+            Ready to Transform Your Benefits?
+          </h2>
+          <p className="text-lg text-white/80 mb-8">
+            Contact us today to learn how our comprehensive services can help your organization 
+            attract and retain top talent while controlling costs.
+          </p>
+          <Button size="lg" variant="secondary" asChild>
+            <Link href="/contact">Get Started</Link>
+          </Button>
+        </div>
+      </section>
     </div>
   );
 }
