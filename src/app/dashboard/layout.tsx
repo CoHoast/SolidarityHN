@@ -29,6 +29,12 @@ const navigation = [
     name: 'Settings', 
     href: '/dashboard/settings', 
     icon: SettingsIcon,
+    children: [
+      { name: 'Team Members', href: '/dashboard/settings/team' },
+      { name: 'Users', href: '/dashboard/settings/users' },
+      { name: 'Payers', href: '/dashboard/settings/payers' },
+      { name: 'System', href: '/dashboard/settings/system' },
+    ]
   },
   { name: 'Audit Log', href: '/dashboard/audit', icon: ScrollTextIcon },
 ];
@@ -256,17 +262,6 @@ export default function DashboardLayout({
                 })}
               </ul>
               
-              {/* Pro Feature Card */}
-              <div className="mt-8 mx-2 p-4 rounded-2xl bg-gradient-to-br from-primary/20 to-purple-500/20 border border-white/10">
-                <div className="w-10 h-10 bg-gradient-to-br from-primary to-purple-500 rounded-xl flex items-center justify-center mb-3 shadow-lg">
-                  <SparklesIcon className="w-5 h-5 text-white" />
-                </div>
-                <p className="text-white font-semibold text-sm">AI Insights</p>
-                <p className="text-white/60 text-xs mt-1">Get predictive analytics and smart recommendations</p>
-                <button className="mt-3 w-full py-2 bg-white/10 hover:bg-white/20 text-white text-xs font-medium rounded-lg transition-colors">
-                  Upgrade Plan
-                </button>
-              </div>
             </nav>
             
             {/* User section */}
