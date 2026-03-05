@@ -304,34 +304,13 @@ const ruleCategories = [
 
 // Enhanced sample rules
 const sampleRules: Rule[] = [
+  // ============================================
+  // PRIORITY 0 - ELIGIBILITY DENIALS (Run First)
+  // ============================================
   {
     id: 'RULE-001',
-    name: 'Clean Claim - Auto Approve',
-    description: 'Automatically approve clean claims with high AI confidence, active member, valid provider, and moderate dollar amount',
-    conditionGroups: [{
-      logic: 'AND',
-      conditions: [
-        { field: 'ai_confidence_score', operator: 'greater_or_equal', value: '95' },
-        { field: 'billed_amount', operator: 'less_than', value: '2500' },
-        { field: 'has_validation_errors', operator: 'is_false', value: '' },
-        { field: 'member_status', operator: 'equals', value: 'Active' },
-        { field: 'provider_network_status', operator: 'equals', value: 'In-Network' },
-        { field: 'billing_npi_valid', operator: 'is_true', value: '' },
-      ]
-    }],
-    action: 'APPROVE',
-    actionReason: 'Clean claim meeting all auto-approval criteria',
-    priority: 10,
-    enabled: true,
-    hitCount: 4521,
-    lastTriggered: '1 min ago',
-    createdAt: '2024-01-15',
-    category: 'AI Confidence',
-  },
-  {
-    id: 'RULE-002',
     name: 'Member Not Eligible - Deny',
-    description: 'Deny claims when member coverage is inactive, terminated, or service date outside coverage period',
+    description: 'Deny claims when member coverage is inactive, terminated, or pending',
     conditionGroups: [{
       logic: 'OR',
       conditions: [
@@ -345,15 +324,83 @@ const sampleRules: Rule[] = [
     remarkCode: '',
     priority: 0,
     enabled: true,
-    hitCount: 234,
-    lastTriggered: '15 min ago',
+    hitCount: 1234,
+    lastTriggered: '5 min ago',
     createdAt: '2024-01-15',
     category: 'Eligibility',
   },
   {
+    id: 'RULE-002',
+    name: 'Duplicate Claim - Deny',
+    description: 'Deny claims identified as exact duplicates of previously processed claims',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'is_duplicate', operator: 'is_true', value: '' },
+        { field: 'is_resubmission', operator: 'is_false', value: '' },
+      ]
+    }],
+    action: 'DENY',
+    actionReason: 'Exact duplicate of previously processed claim',
+    denialCode: 'CO-18',
+    remarkCode: 'N522',
+    priority: 0,
+    enabled: true,
+    hitCount: 567,
+    lastTriggered: '15 min ago',
+    createdAt: '2024-01-15',
+    category: 'Duplicate Detection',
+  },
+  {
     id: 'RULE-003',
+    name: 'Timely Filing Exceeded - Deny',
+    description: 'Deny claims submitted more than 365 days after date of service',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'days_since_service', operator: 'greater_than', value: '365' },
+      ]
+    }],
+    action: 'DENY',
+    actionReason: 'Claim exceeds timely filing limit of 365 days from DOS',
+    denialCode: 'CO-29',
+    remarkCode: '',
+    priority: 0,
+    enabled: true,
+    hitCount: 234,
+    lastTriggered: '2 hours ago',
+    createdAt: '2024-01-15',
+    category: 'Timely Filing',
+  },
+  {
+    id: 'RULE-004',
+    name: 'Patient Deceased Before DOS - Deny',
+    description: 'Deny claims where patient was deceased before date of service',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'patient_deceased', operator: 'is_true', value: '' },
+      ]
+    }],
+    action: 'DENY',
+    actionReason: 'Patient deceased - service date after death date',
+    denialCode: 'CO-27',
+    remarkCode: '',
+    priority: 0,
+    enabled: true,
+    hitCount: 12,
+    lastTriggered: '5 days ago',
+    createdAt: '2024-01-15',
+    category: 'Eligibility',
+  },
+  
+  // ============================================
+  // PRIORITY 1 - AUTHORIZATION DENIALS
+  // ============================================
+  {
+    id: 'RULE-005',
     name: 'Missing Prior Authorization - Deny',
-    description: 'Deny when procedure requires prior authorization but none is on file or authorization is expired/invalid',
+    description: 'Deny when procedure requires prior authorization but none is on file',
     conditionGroups: [{
       logic: 'AND',
       conditions: [
@@ -367,136 +414,85 @@ const sampleRules: Rule[] = [
     remarkCode: '',
     priority: 1,
     enabled: true,
-    hitCount: 189,
-    lastTriggered: '2 hours ago',
+    hitCount: 456,
+    lastTriggered: '30 min ago',
     createdAt: '2024-01-15',
     category: 'Authorization',
   },
   {
-    id: 'RULE-004',
-    name: 'Duplicate Claim - Deny',
-    description: 'Deny claims identified as duplicates of previously submitted claims',
+    id: 'RULE-006',
+    name: 'Invalid/Expired Prior Auth - Deny',
+    description: 'Deny when prior authorization exists but is invalid or expired for DOS',
     conditionGroups: [{
       logic: 'AND',
       conditions: [
-        { field: 'is_duplicate', operator: 'is_true', value: '' },
-        { field: 'is_resubmission', operator: 'is_false', value: '' },
+        { field: 'requires_prior_auth', operator: 'is_true', value: '' },
+        { field: 'has_prior_auth', operator: 'is_true', value: '' },
+        { field: 'prior_auth_valid', operator: 'is_false', value: '' },
       ]
     }],
     action: 'DENY',
-    actionReason: 'Duplicate of previously processed claim',
-    denialCode: 'CO-18',
-    remarkCode: 'N522',
-    priority: 0,
+    actionReason: 'Prior authorization invalid or expired for date of service',
+    denialCode: 'CO-15',
+    remarkCode: '',
+    priority: 1,
     enabled: true,
-    hitCount: 156,
+    hitCount: 189,
     lastTriggered: '3 hours ago',
     createdAt: '2024-01-15',
-    category: 'Duplicate Detection',
-  },
-  {
-    id: 'RULE-005',
-    name: 'Timely Filing Exceeded - Deny',
-    description: 'Deny claims submitted more than 365 days after date of service',
-    conditionGroups: [{
-      logic: 'AND',
-      conditions: [
-        { field: 'days_since_service', operator: 'greater_than', value: '365' },
-      ]
-    }],
-    action: 'DENY',
-    actionReason: 'Claim exceeds timely filing limit of 365 days',
-    denialCode: 'CO-29',
-    remarkCode: '',
-    priority: 0,
-    enabled: true,
-    hitCount: 67,
-    lastTriggered: '1 day ago',
-    createdAt: '2024-01-15',
-    category: 'Timely Filing',
-  },
-  {
-    id: 'RULE-006',
-    name: 'High Dollar Claim - Review',
-    description: 'Route high dollar claims to manual review queue for additional verification',
-    conditionGroups: [{
-      logic: 'AND',
-      conditions: [
-        { field: 'billed_amount', operator: 'greater_than', value: '10000' },
-      ]
-    }],
-    action: 'REVIEW',
-    actionReason: 'High dollar amount requires manual review',
-    priority: 5,
-    enabled: true,
-    hitCount: 445,
-    lastTriggered: '30 min ago',
-    createdAt: '2024-01-15',
-    category: 'High Dollar Review',
+    category: 'Authorization',
   },
   {
     id: 'RULE-007',
-    name: 'Low AI Confidence - Review',
-    description: 'Route claims with low AI extraction confidence to manual review for data verification',
+    name: 'Exceeded Authorized Units - Deny',
+    description: 'Deny when billed units exceed remaining authorized units',
     conditionGroups: [{
       logic: 'AND',
       conditions: [
-        { field: 'ai_confidence_score', operator: 'less_than', value: '85' },
+        { field: 'requires_prior_auth', operator: 'is_true', value: '' },
+        { field: 'auth_units_remaining', operator: 'equals', value: '0' },
       ]
     }],
-    action: 'REVIEW',
-    actionReason: 'AI confidence below threshold - verify extracted data accuracy',
-    priority: 3,
+    action: 'DENY',
+    actionReason: 'Units exceed authorized quantity - authorization exhausted',
+    denialCode: 'CO-119',
+    remarkCode: '',
+    priority: 1,
     enabled: true,
-    hitCount: 789,
-    lastTriggered: '5 min ago',
+    hitCount: 78,
+    lastTriggered: '6 hours ago',
     createdAt: '2024-01-15',
-    category: 'AI Confidence',
+    category: 'Authorization',
   },
   {
     id: 'RULE-008',
-    name: 'Out of Network Provider - Review',
-    description: 'Route out-of-network claims to review for OON benefit verification and balance billing check',
+    name: 'Missing Referral - Deny',
+    description: 'Deny when HMO plan requires referral but none is on file',
     conditionGroups: [{
       logic: 'AND',
       conditions: [
-        { field: 'provider_network_status', operator: 'equals', value: 'Out-of-Network' },
-        { field: 'is_emergency', operator: 'is_false', value: '' },
+        { field: 'plan_type', operator: 'equals', value: 'HMO' },
+        { field: 'referral_required', operator: 'is_true', value: '' },
+        { field: 'has_referral', operator: 'is_false', value: '' },
       ]
     }],
-    action: 'REVIEW',
-    actionReason: 'Out-of-network provider - verify OON benefits and allowable',
-    priority: 4,
+    action: 'DENY',
+    actionReason: 'HMO plan requires referral - none on file',
+    denialCode: 'CO-204',
+    remarkCode: '',
+    priority: 1,
     enabled: true,
-    hitCount: 567,
-    lastTriggered: '45 min ago',
+    hitCount: 234,
+    lastTriggered: '1 hour ago',
     createdAt: '2024-01-15',
-    category: 'Provider Validation',
+    category: 'Authorization',
   },
+  
+  // ============================================
+  // PRIORITY 1 - CODE EDIT DENIALS
+  // ============================================
   {
     id: 'RULE-009',
-    name: 'Invalid Provider NPI - Pend',
-    description: 'Pend claims where billing or rendering provider NPI fails validation',
-    conditionGroups: [{
-      logic: 'OR',
-      conditions: [
-        { field: 'billing_npi_valid', operator: 'is_false', value: '' },
-        { field: 'rendering_npi_valid', operator: 'is_false', value: '' },
-      ]
-    }],
-    action: 'PEND',
-    actionReason: 'Provider NPI validation failed - pending verification',
-    denialCode: 'CO-16',
-    remarkCode: 'MA07',
-    priority: 2,
-    enabled: true,
-    hitCount: 123,
-    lastTriggered: '4 hours ago',
-    createdAt: '2024-01-15',
-    category: 'Provider Validation',
-  },
-  {
-    id: 'RULE-010',
     name: 'MUE Exceeded - Deny',
     description: 'Deny line items that exceed Medically Unlikely Edits (MUE) unit limits',
     conditionGroups: [{
@@ -511,37 +507,303 @@ const sampleRules: Rule[] = [
     remarkCode: '',
     priority: 1,
     enabled: true,
-    hitCount: 234,
-    lastTriggered: '6 hours ago',
+    hitCount: 345,
+    lastTriggered: '45 min ago',
+    createdAt: '2024-01-15',
+    category: 'Code Edits (NCCI/MUE)',
+  },
+  {
+    id: 'RULE-010',
+    name: 'NCCI Bundling Edit - Deny',
+    description: 'Deny when NCCI edit indicates procedure is bundled with another',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'ncci_edit_triggered', operator: 'is_true', value: '' },
+      ]
+    }],
+    action: 'DENY',
+    actionReason: 'Service bundled with primary procedure per NCCI edits',
+    denialCode: 'CO-97',
+    remarkCode: 'M15',
+    priority: 1,
+    enabled: true,
+    hitCount: 567,
+    lastTriggered: '20 min ago',
     createdAt: '2024-01-15',
     category: 'Code Edits (NCCI/MUE)',
   },
   {
     id: 'RULE-011',
-    name: 'Emergency OON - Auto Approve',
-    description: 'Auto-approve emergency services from out-of-network providers (No Surprises Act compliance)',
+    name: 'Invalid Diagnosis Code - Deny',
+    description: 'Deny when primary diagnosis code is invalid or truncated',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'primary_dx_valid', operator: 'is_false', value: '' },
+      ]
+    }],
+    action: 'DENY',
+    actionReason: 'Primary diagnosis code invalid - verify ICD-10 code',
+    denialCode: 'CO-16',
+    remarkCode: 'M20',
+    priority: 1,
+    enabled: true,
+    hitCount: 123,
+    lastTriggered: '4 hours ago',
+    createdAt: '2024-01-15',
+    category: 'Procedure Validation',
+  },
+  {
+    id: 'RULE-012',
+    name: 'Invalid Procedure Code - Deny',
+    description: 'Deny when CPT/HCPCS code is invalid, deleted, or not effective for DOS',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'procedure_valid', operator: 'is_false', value: '' },
+      ]
+    }],
+    action: 'DENY',
+    actionReason: 'Procedure code invalid or not effective for date of service',
+    denialCode: 'CO-16',
+    remarkCode: 'N56',
+    priority: 1,
+    enabled: true,
+    hitCount: 89,
+    lastTriggered: '5 hours ago',
+    createdAt: '2024-01-15',
+    category: 'Procedure Validation',
+  },
+  {
+    id: 'RULE-013',
+    name: 'Diagnosis Does Not Support Procedure - Deny',
+    description: 'Deny when primary diagnosis is not medically consistent with procedure',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'dx_supports_procedure', operator: 'is_false', value: '' },
+      ]
+    }],
+    action: 'DENY',
+    actionReason: 'Diagnosis does not support medical necessity of procedure',
+    denialCode: 'CO-11',
+    remarkCode: '',
+    priority: 1,
+    enabled: true,
+    hitCount: 234,
+    lastTriggered: '2 hours ago',
+    createdAt: '2024-01-15',
+    category: 'Medical Necessity',
+  },
+  
+  // ============================================
+  // PRIORITY 1 - NON-COVERED SERVICES
+  // ============================================
+  {
+    id: 'RULE-014',
+    name: 'Cosmetic Procedure - Deny',
+    description: 'Deny procedures identified as cosmetic/elective without medical necessity',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'is_cosmetic', operator: 'is_true', value: '' },
+      ]
+    }],
+    action: 'DENY',
+    actionReason: 'Cosmetic procedure - not covered without documented medical necessity',
+    denialCode: 'CO-50',
+    remarkCode: '',
+    priority: 1,
+    enabled: true,
+    hitCount: 67,
+    lastTriggered: '1 day ago',
+    createdAt: '2024-01-15',
+    category: 'Medical Necessity',
+  },
+  {
+    id: 'RULE-015',
+    name: 'Experimental Procedure - Deny',
+    description: 'Deny procedures classified as experimental or investigational',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'is_experimental', operator: 'is_true', value: '' },
+      ]
+    }],
+    action: 'DENY',
+    actionReason: 'Experimental/investigational procedure - not a covered benefit',
+    denialCode: 'CO-50',
+    remarkCode: '',
+    priority: 1,
+    enabled: true,
+    hitCount: 23,
+    lastTriggered: '3 days ago',
+    createdAt: '2024-01-15',
+    category: 'Medical Necessity',
+  },
+  
+  // ============================================
+  // PRIORITY 1 - EMERGENCY/COMPLIANCE APPROVALS
+  // ============================================
+  {
+    id: 'RULE-016',
+    name: 'Emergency OON - Auto Approve (No Surprises Act)',
+    description: 'Auto-approve emergency services from OON providers per No Surprises Act',
     conditionGroups: [{
       logic: 'AND',
       conditions: [
         { field: 'is_emergency', operator: 'is_true', value: '' },
         { field: 'provider_network_status', operator: 'equals', value: 'Out-of-Network' },
         { field: 'member_status', operator: 'equals', value: 'Active' },
-        { field: 'ai_confidence_score', operator: 'greater_or_equal', value: '90' },
       ]
     }],
     action: 'APPROVE',
-    actionReason: 'Emergency services - OON covered per No Surprises Act',
+    actionReason: 'Emergency services - OON covered per No Surprises Act compliance',
     priority: 1,
     enabled: true,
-    hitCount: 89,
-    lastTriggered: '2 days ago',
-    createdAt: '2024-02-01',
+    hitCount: 156,
+    lastTriggered: '6 hours ago',
+    createdAt: '2024-01-15',
     category: 'Eligibility',
   },
+  
+  // ============================================
+  // PRIORITY 2 - PEND FOR ADDITIONAL INFO
+  // ============================================
   {
-    id: 'RULE-012',
-    name: 'COB - Secondary Payer Review',
-    description: 'Route claims with COB indicator to review for primary payer payment verification',
+    id: 'RULE-017',
+    name: 'Invalid Billing NPI - Pend',
+    description: 'Pend claims where billing provider NPI fails NPPES validation',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'billing_npi_valid', operator: 'is_false', value: '' },
+      ]
+    }],
+    action: 'PEND',
+    actionReason: 'Billing provider NPI validation failed - verify NPPES',
+    denialCode: 'CO-16',
+    remarkCode: 'MA07',
+    priority: 2,
+    enabled: true,
+    hitCount: 189,
+    lastTriggered: '2 hours ago',
+    createdAt: '2024-01-15',
+    category: 'Provider Validation',
+  },
+  {
+    id: 'RULE-018',
+    name: 'Invalid Rendering NPI - Pend',
+    description: 'Pend claims where rendering provider NPI fails NPPES validation',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'rendering_npi_valid', operator: 'is_false', value: '' },
+      ]
+    }],
+    action: 'PEND',
+    actionReason: 'Rendering provider NPI validation failed - verify NPPES',
+    denialCode: 'CO-16',
+    remarkCode: 'MA07',
+    priority: 2,
+    enabled: true,
+    hitCount: 145,
+    lastTriggered: '3 hours ago',
+    createdAt: '2024-01-15',
+    category: 'Provider Validation',
+  },
+  {
+    id: 'RULE-019',
+    name: 'Missing Required Fields - Pend',
+    description: 'Pend claims missing required fields for adjudication',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'missing_required_fields', operator: 'is_true', value: '' },
+      ]
+    }],
+    action: 'PEND',
+    actionReason: 'Claim missing required information - request additional data',
+    denialCode: 'CO-16',
+    remarkCode: '',
+    priority: 2,
+    enabled: true,
+    hitCount: 234,
+    lastTriggered: '1 hour ago',
+    createdAt: '2024-01-15',
+    category: 'Procedure Validation',
+  },
+  {
+    id: 'RULE-020',
+    name: 'Missing Referring Provider - Pend',
+    description: 'Pend claims requiring referring provider but field is missing',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'referral_required', operator: 'is_true', value: '' },
+        { field: 'referring_provider_present', operator: 'is_false', value: '' },
+      ]
+    }],
+    action: 'PEND',
+    actionReason: 'Referring provider required but not provided on claim',
+    denialCode: 'CO-16',
+    remarkCode: 'N479',
+    priority: 2,
+    enabled: true,
+    hitCount: 178,
+    lastTriggered: '4 hours ago',
+    createdAt: '2024-01-15',
+    category: 'Provider Validation',
+  },
+  {
+    id: 'RULE-021',
+    name: 'Provider Not Enrolled - Pend',
+    description: 'Pend claims from providers not enrolled with the payer',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'provider_enrolled', operator: 'is_false', value: '' },
+      ]
+    }],
+    action: 'PEND',
+    actionReason: 'Provider not enrolled - verify enrollment status',
+    denialCode: 'CO-16',
+    remarkCode: '',
+    priority: 2,
+    enabled: true,
+    hitCount: 89,
+    lastTriggered: '8 hours ago',
+    createdAt: '2024-01-15',
+    category: 'Provider Validation',
+  },
+  
+  // ============================================
+  // PRIORITY 3 - MANUAL REVIEW REQUIRED
+  // ============================================
+  {
+    id: 'RULE-022',
+    name: 'Low AI Confidence - Review',
+    description: 'Route claims with low AI extraction confidence to manual data verification',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'ai_confidence_score', operator: 'less_than', value: '85' },
+      ]
+    }],
+    action: 'REVIEW',
+    actionReason: 'AI confidence below 85% - verify extracted data accuracy',
+    priority: 3,
+    enabled: true,
+    hitCount: 1567,
+    lastTriggered: '2 min ago',
+    createdAt: '2024-01-15',
+    category: 'AI Confidence',
+  },
+  {
+    id: 'RULE-023',
+    name: 'COB Secondary Payer - Review',
+    description: 'Route secondary/tertiary payer claims to verify primary EOB',
     conditionGroups: [{
       logic: 'AND',
       conditions: [
@@ -549,13 +811,379 @@ const sampleRules: Rule[] = [
       ]
     }],
     action: 'REVIEW',
-    actionReason: 'COB claim - verify primary payer EOB attached',
+    actionReason: 'COB claim - verify primary payer EOB and payment attached',
     priority: 3,
     enabled: true,
-    hitCount: 312,
-    lastTriggered: '1 hour ago',
-    createdAt: '2024-02-01',
+    hitCount: 678,
+    lastTriggered: '30 min ago',
+    createdAt: '2024-01-15',
     category: 'Coordination of Benefits',
+  },
+  {
+    id: 'RULE-024',
+    name: 'Workers Comp Indicator - Review',
+    description: 'Route workers compensation claims for liability verification',
+    conditionGroups: [{
+      logic: 'OR',
+      conditions: [
+        { field: 'is_workers_comp', operator: 'is_true', value: '' },
+        { field: 'accident_type', operator: 'equals', value: 'Work' },
+      ]
+    }],
+    action: 'REVIEW',
+    actionReason: 'Workers compensation indicated - verify liability',
+    priority: 3,
+    enabled: true,
+    hitCount: 123,
+    lastTriggered: '4 hours ago',
+    createdAt: '2024-01-15',
+    category: 'Coordination of Benefits',
+  },
+  {
+    id: 'RULE-025',
+    name: 'Auto Accident - Review',
+    description: 'Route auto accident claims for liability and subrogation review',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'accident_type', operator: 'equals', value: 'Auto' },
+      ]
+    }],
+    action: 'REVIEW',
+    actionReason: 'Auto accident indicated - verify liability and subrogation',
+    priority: 3,
+    enabled: true,
+    hitCount: 89,
+    lastTriggered: '1 day ago',
+    createdAt: '2024-01-15',
+    category: 'Coordination of Benefits',
+  },
+  {
+    id: 'RULE-026',
+    name: 'Inpatient Long Stay - Review',
+    description: 'Route inpatient claims with extended length of stay for review',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'claim_type', operator: 'equals', value: 'Institutional (837I)' },
+        { field: 'length_of_stay', operator: 'greater_than', value: '14' },
+      ]
+    }],
+    action: 'REVIEW',
+    actionReason: 'Extended inpatient stay (>14 days) - medical necessity review',
+    priority: 3,
+    enabled: true,
+    hitCount: 234,
+    lastTriggered: '6 hours ago',
+    createdAt: '2024-01-15',
+    category: 'Medical Necessity',
+  },
+  {
+    id: 'RULE-027',
+    name: 'Out of Network (Non-Emergency) - Review',
+    description: 'Route non-emergency OON claims for benefit verification',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'provider_network_status', operator: 'equals', value: 'Out-of-Network' },
+        { field: 'is_emergency', operator: 'is_false', value: '' },
+      ]
+    }],
+    action: 'REVIEW',
+    actionReason: 'Out-of-network provider - verify OON benefits and allowable amount',
+    priority: 3,
+    enabled: true,
+    hitCount: 456,
+    lastTriggered: '1 hour ago',
+    createdAt: '2024-01-15',
+    category: 'Provider Validation',
+  },
+  {
+    id: 'RULE-028',
+    name: 'Multiple Surgery Modifier - Review',
+    description: 'Route claims with modifier 51 (multiple surgeries) for payment reduction review',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'modifier_present', operator: 'contains_any', value: '51' },
+      ]
+    }],
+    action: 'REVIEW',
+    actionReason: 'Multiple surgery modifier - verify payment reduction applied',
+    priority: 3,
+    enabled: true,
+    hitCount: 345,
+    lastTriggered: '2 hours ago',
+    createdAt: '2024-01-15',
+    category: 'Procedure Validation',
+  },
+  {
+    id: 'RULE-029',
+    name: 'Bilateral Procedure Modifier - Review',
+    description: 'Route claims with modifier 50 (bilateral) for payment calculation',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'modifier_present', operator: 'contains_any', value: '50' },
+      ]
+    }],
+    action: 'REVIEW',
+    actionReason: 'Bilateral modifier - verify 150% payment calculation',
+    priority: 3,
+    enabled: true,
+    hitCount: 234,
+    lastTriggered: '3 hours ago',
+    createdAt: '2024-01-15',
+    category: 'Procedure Validation',
+  },
+  {
+    id: 'RULE-030',
+    name: 'Corrected Claim Resubmission - Review',
+    description: 'Route corrected/replacement claims for adjustment processing',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'is_resubmission', operator: 'is_true', value: '' },
+      ]
+    }],
+    action: 'REVIEW',
+    actionReason: 'Corrected claim - verify changes and process adjustment',
+    priority: 3,
+    enabled: true,
+    hitCount: 189,
+    lastTriggered: '5 hours ago',
+    createdAt: '2024-01-15',
+    category: 'Duplicate Detection',
+  },
+  
+  // ============================================
+  // PRIORITY 5 - HIGH DOLLAR REVIEW
+  // ============================================
+  {
+    id: 'RULE-031',
+    name: 'High Dollar Claim ($10K+) - Review',
+    description: 'Route claims over $10,000 to manual review queue',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'billed_amount', operator: 'greater_than', value: '10000' },
+      ]
+    }],
+    action: 'REVIEW',
+    actionReason: 'High dollar claim (>$10K) - requires additional review',
+    priority: 5,
+    enabled: true,
+    hitCount: 567,
+    lastTriggered: '30 min ago',
+    createdAt: '2024-01-15',
+    category: 'High Dollar Review',
+  },
+  {
+    id: 'RULE-032',
+    name: 'Very High Dollar Claim ($50K+) - Review',
+    description: 'Route claims over $50,000 to senior reviewer queue',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'billed_amount', operator: 'greater_than', value: '50000' },
+      ]
+    }],
+    action: 'REVIEW',
+    actionReason: 'Very high dollar claim (>$50K) - senior reviewer required',
+    priority: 5,
+    enabled: true,
+    hitCount: 89,
+    lastTriggered: '1 day ago',
+    createdAt: '2024-01-15',
+    category: 'High Dollar Review',
+  },
+  
+  // ============================================
+  // PRIORITY 10 - AUTO-APPROVE (Clean Claims)
+  // ============================================
+  {
+    id: 'RULE-033',
+    name: 'Clean Claim - Auto Approve',
+    description: 'Auto-approve clean claims with high confidence, active member, valid provider, low dollar',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'ai_confidence_score', operator: 'greater_or_equal', value: '95' },
+        { field: 'billed_amount', operator: 'less_than', value: '2500' },
+        { field: 'has_validation_errors', operator: 'is_false', value: '' },
+        { field: 'member_status', operator: 'equals', value: 'Active' },
+        { field: 'provider_network_status', operator: 'equals', value: 'In-Network' },
+        { field: 'billing_npi_valid', operator: 'is_true', value: '' },
+        { field: 'is_duplicate', operator: 'is_false', value: '' },
+      ]
+    }],
+    action: 'APPROVE',
+    actionReason: 'Clean claim meeting all auto-approval criteria',
+    priority: 10,
+    enabled: true,
+    hitCount: 8934,
+    lastTriggered: '30 sec ago',
+    createdAt: '2024-01-15',
+    category: 'AI Confidence',
+  },
+  {
+    id: 'RULE-034',
+    name: 'Preventive Care E&M - Auto Approve',
+    description: 'Auto-approve preventive care E&M visits (wellness exams)',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'procedure_category', operator: 'equals', value: 'Preventive' },
+        { field: 'member_status', operator: 'equals', value: 'Active' },
+        { field: 'provider_network_status', operator: 'equals', value: 'In-Network' },
+        { field: 'ai_confidence_score', operator: 'greater_or_equal', value: '90' },
+      ]
+    }],
+    action: 'APPROVE',
+    actionReason: 'Preventive care service - covered at 100% with no cost share',
+    priority: 10,
+    enabled: true,
+    hitCount: 2345,
+    lastTriggered: '10 min ago',
+    createdAt: '2024-01-15',
+    category: 'Eligibility',
+  },
+  {
+    id: 'RULE-035',
+    name: 'Lab/Pathology - Auto Approve',
+    description: 'Auto-approve routine lab and pathology claims from in-network providers',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'procedure_category', operator: 'equals', value: 'Pathology/Lab' },
+        { field: 'member_status', operator: 'equals', value: 'Active' },
+        { field: 'provider_network_status', operator: 'equals', value: 'In-Network' },
+        { field: 'billed_amount', operator: 'less_than', value: '1000' },
+        { field: 'ai_confidence_score', operator: 'greater_or_equal', value: '90' },
+      ]
+    }],
+    action: 'APPROVE',
+    actionReason: 'Routine lab/pathology - auto-approved',
+    priority: 10,
+    enabled: true,
+    hitCount: 4567,
+    lastTriggered: '5 min ago',
+    createdAt: '2024-01-15',
+    category: 'AI Confidence',
+  },
+  {
+    id: 'RULE-036',
+    name: 'Office Visit E&M - Auto Approve',
+    description: 'Auto-approve standard office visits (99211-99215) from in-network providers',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'procedure_category', operator: 'equals', value: 'E&M' },
+        { field: 'place_of_service', operator: 'equals', value: '11 - Office' },
+        { field: 'member_status', operator: 'equals', value: 'Active' },
+        { field: 'provider_network_status', operator: 'equals', value: 'In-Network' },
+        { field: 'billed_amount', operator: 'less_than', value: '500' },
+        { field: 'ai_confidence_score', operator: 'greater_or_equal', value: '92' },
+      ]
+    }],
+    action: 'APPROVE',
+    actionReason: 'Standard office E&M visit - auto-approved',
+    priority: 10,
+    enabled: true,
+    hitCount: 6789,
+    lastTriggered: '1 min ago',
+    createdAt: '2024-01-15',
+    category: 'AI Confidence',
+  },
+  {
+    id: 'RULE-037',
+    name: 'Telehealth Visit - Auto Approve',
+    description: 'Auto-approve telehealth visits from enrolled providers',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'procedure_category', operator: 'equals', value: 'Telehealth' },
+        { field: 'member_status', operator: 'equals', value: 'Active' },
+        { field: 'provider_enrolled', operator: 'is_true', value: '' },
+        { field: 'ai_confidence_score', operator: 'greater_or_equal', value: '90' },
+      ]
+    }],
+    action: 'APPROVE',
+    actionReason: 'Telehealth visit - auto-approved',
+    priority: 10,
+    enabled: true,
+    hitCount: 1234,
+    lastTriggered: '15 min ago',
+    createdAt: '2024-01-15',
+    category: 'AI Confidence',
+  },
+  
+  // ============================================
+  // PRIORITY 15 - DEPENDENT AGE LIMITS
+  // ============================================
+  {
+    id: 'RULE-038',
+    name: 'Dependent Over Age 26 - Deny',
+    description: 'Deny claims for dependents over age 26 (ACA limit)',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'subscriber_relationship', operator: 'equals', value: 'Child' },
+        { field: 'member_age', operator: 'greater_than', value: '26' },
+      ]
+    }],
+    action: 'DENY',
+    actionReason: 'Dependent over age 26 - not eligible for coverage',
+    denialCode: 'CO-27',
+    remarkCode: '',
+    priority: 15,
+    enabled: true,
+    hitCount: 45,
+    lastTriggered: '2 days ago',
+    createdAt: '2024-01-15',
+    category: 'Eligibility',
+  },
+  {
+    id: 'RULE-039',
+    name: 'Pediatric Service on Adult - Review',
+    description: 'Review pediatric-specific services billed for patients over 18',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'provider_specialty', operator: 'equals', value: 'Pediatrics' },
+        { field: 'member_age', operator: 'greater_than', value: '18' },
+      ]
+    }],
+    action: 'REVIEW',
+    actionReason: 'Pediatric service for adult patient - verify appropriateness',
+    priority: 15,
+    enabled: true,
+    hitCount: 67,
+    lastTriggered: '1 day ago',
+    createdAt: '2024-01-15',
+    category: 'Medical Necessity',
+  },
+  {
+    id: 'RULE-040',
+    name: 'OB/GYN on Male Patient - Deny',
+    description: 'Deny OB/GYN procedures billed for male patients',
+    conditionGroups: [{
+      logic: 'AND',
+      conditions: [
+        { field: 'provider_specialty', operator: 'equals', value: 'OB/GYN' },
+        { field: 'member_gender', operator: 'equals', value: 'Male' },
+      ]
+    }],
+    action: 'DENY',
+    actionReason: 'Gender-specific procedure inconsistent with patient gender',
+    denialCode: 'CO-11',
+    remarkCode: '',
+    priority: 15,
+    enabled: true,
+    hitCount: 12,
+    lastTriggered: '1 week ago',
+    createdAt: '2024-01-15',
+    category: 'Procedure Validation',
   },
 ];
 
