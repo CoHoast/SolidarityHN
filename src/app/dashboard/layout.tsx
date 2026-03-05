@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
+import { useState } from 'react';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboardIcon },
@@ -22,22 +23,12 @@ const navigation = [
     name: 'Repricing', 
     href: '/dashboard/repricing', 
     icon: DollarSignIcon,
-    children: [
-      { name: 'Fee Schedules', href: '/dashboard/repricing/fee-schedules' },
-      { name: 'Medicare Rates', href: '/dashboard/repricing/medicare' },
-    ]
   },
   { name: 'Reports', href: '/dashboard/reports', icon: BarChart3Icon },
   { 
     name: 'Settings', 
     href: '/dashboard/settings', 
     icon: SettingsIcon,
-    children: [
-      { name: 'Users', href: '/dashboard/settings/users' },
-      { name: 'Rules', href: '/dashboard/settings/rules' },
-      { name: 'Payers', href: '/dashboard/settings/payers' },
-      { name: 'System', href: '/dashboard/settings/system' },
-    ]
   },
   { name: 'Audit Log', href: '/dashboard/audit', icon: ScrollTextIcon },
 ];
@@ -116,104 +107,182 @@ function BellIcon({ className }: { className?: string }) {
   );
 }
 
+function SearchIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+    </svg>
+  );
+}
+
+function SparklesIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+    </svg>
+  );
+}
+
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const [expandedItem, setExpandedItem] = useState<string | null>('Claims');
+  
+  const toggleExpand = (name: string) => {
+    setExpandedItem(expandedItem === name ? null : name);
+  };
   
   return (
     <html lang="en">
       <body className="bg-slate-50">
         <div className="flex h-screen">
           {/* Sidebar */}
-          <aside className="w-64 bg-primary flex flex-col">
+          <aside className="w-72 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800 flex flex-col relative overflow-hidden">
+            {/* Background decoration */}
+            <div className="absolute inset-0 opacity-30">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2" />
+              <div className="absolute bottom-0 left-0 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2" />
+            </div>
+            
             {/* Logo */}
-            <div className="h-16 flex items-center px-6 border-b border-white/10">
-              <Link href="/dashboard" className="flex items-center gap-3">
-                <Image
-                  src="/images/logo.png"
-                  alt="Solidarity Health Network"
-                  width={36}
-                  height={36}
-                  className="rounded"
-                />
-                <div className="text-white">
-                  <div className="font-semibold text-sm leading-tight">Solidarity</div>
-                  <div className="text-[10px] text-white/70 uppercase tracking-wider">Clearing House</div>
+            <div className="relative h-20 flex items-center px-6 border-b border-white/5">
+              <Link href="/dashboard" className="flex items-center gap-3 group">
+                <div className="w-10 h-10 bg-gradient-to-br from-primary to-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary/25 group-hover:shadow-primary/40 transition-shadow">
+                  <Image
+                    src="/images/logo-icon.png"
+                    alt="Solidarity"
+                    width={24}
+                    height={24}
+                    className="rounded"
+                  />
+                </div>
+                <div>
+                  <div className="text-white font-bold text-lg tracking-tight">Solidarity</div>
+                  <div className="text-[10px] text-white/50 uppercase tracking-[0.2em] font-medium">Clearing House</div>
                 </div>
               </Link>
             </div>
             
             {/* Navigation */}
-            <nav className="flex-1 overflow-y-auto py-4 px-3">
+            <nav className="relative flex-1 overflow-y-auto py-6 px-4">
+              <div className="text-[11px] text-white/40 uppercase tracking-wider font-semibold px-3 mb-3">
+                Main Menu
+              </div>
               <ul className="space-y-1">
                 {navigation.map((item) => {
                   const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
+                  const isExpanded = expandedItem === item.name;
                   const Icon = item.icon;
                   
                   return (
                     <li key={item.name}>
-                      <Link
-                        href={item.href}
-                        className={`
-                          flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
-                          transition-colors duration-150
-                          ${isActive 
-                            ? 'bg-white/15 text-white' 
-                            : 'text-white/70 hover:bg-white/10 hover:text-white'
-                          }
-                        `}
-                      >
-                        <Icon className="w-5 h-5 flex-shrink-0" />
-                        <span className="flex-1">{item.name}</span>
-                        {item.children && (
-                          <ChevronDownIcon className={`w-4 h-4 transition-transform ${isActive ? 'rotate-180' : ''}`} />
-                        )}
-                      </Link>
-                      
-                      {/* Submenu */}
-                      {item.children && isActive && (
-                        <ul className="mt-1 ml-8 space-y-1">
-                          {item.children.map((child) => {
-                            const isChildActive = pathname === child.href;
-                            return (
-                              <li key={child.name}>
-                                <Link
-                                  href={child.href}
-                                  className={`
-                                    block px-3 py-2 rounded-md text-sm
-                                    transition-colors duration-150
-                                    ${isChildActive 
-                                      ? 'text-white bg-white/10' 
-                                      : 'text-white/60 hover:text-white hover:bg-white/5'
-                                    }
-                                  `}
-                                >
-                                  {child.name}
-                                </Link>
-                              </li>
-                            );
-                          })}
-                        </ul>
+                      {item.children ? (
+                        <>
+                          <button
+                            onClick={() => toggleExpand(item.name)}
+                            className={`
+                              w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium
+                              transition-all duration-200
+                              ${isActive 
+                                ? 'bg-white/10 text-white shadow-lg' 
+                                : 'text-white/60 hover:bg-white/5 hover:text-white'
+                              }
+                            `}
+                          >
+                            <div className={`
+                              w-9 h-9 rounded-lg flex items-center justify-center
+                              ${isActive ? 'bg-primary shadow-lg shadow-primary/30' : 'bg-white/5'}
+                              transition-all duration-200
+                            `}>
+                              <Icon className="w-5 h-5" />
+                            </div>
+                            <span className="flex-1 text-left">{item.name}</span>
+                            <ChevronDownIcon className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`} />
+                          </button>
+                          
+                          {/* Submenu */}
+                          <div className={`overflow-hidden transition-all duration-200 ${isExpanded ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}>
+                            <ul className="mt-1 ml-12 space-y-1 py-2 border-l border-white/10">
+                              {item.children.map((child) => {
+                                const isChildActive = pathname === child.href;
+                                return (
+                                  <li key={child.name}>
+                                    <Link
+                                      href={child.href}
+                                      className={`
+                                        block px-4 py-2 rounded-r-lg text-sm relative
+                                        transition-all duration-200
+                                        ${isChildActive 
+                                          ? 'text-white bg-white/5 before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-0.5 before:h-4 before:bg-primary before:rounded-full' 
+                                          : 'text-white/50 hover:text-white hover:bg-white/5'
+                                        }
+                                      `}
+                                    >
+                                      {child.name}
+                                    </Link>
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          </div>
+                        </>
+                      ) : (
+                        <Link
+                          href={item.href}
+                          className={`
+                            flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium
+                            transition-all duration-200
+                            ${isActive 
+                              ? 'bg-white/10 text-white shadow-lg' 
+                              : 'text-white/60 hover:bg-white/5 hover:text-white'
+                            }
+                          `}
+                        >
+                          <div className={`
+                            w-9 h-9 rounded-lg flex items-center justify-center
+                            ${isActive ? 'bg-primary shadow-lg shadow-primary/30' : 'bg-white/5'}
+                            transition-all duration-200
+                          `}>
+                            <Icon className="w-5 h-5" />
+                          </div>
+                          <span>{item.name}</span>
+                        </Link>
                       )}
                     </li>
                   );
                 })}
               </ul>
+              
+              {/* Pro Feature Card */}
+              <div className="mt-8 mx-2 p-4 rounded-2xl bg-gradient-to-br from-primary/20 to-purple-500/20 border border-white/10">
+                <div className="w-10 h-10 bg-gradient-to-br from-primary to-purple-500 rounded-xl flex items-center justify-center mb-3 shadow-lg">
+                  <SparklesIcon className="w-5 h-5 text-white" />
+                </div>
+                <p className="text-white font-semibold text-sm">AI Insights</p>
+                <p className="text-white/60 text-xs mt-1">Get predictive analytics and smart recommendations</p>
+                <button className="mt-3 w-full py-2 bg-white/10 hover:bg-white/20 text-white text-xs font-medium rounded-lg transition-colors">
+                  Upgrade Plan
+                </button>
+              </div>
             </nav>
             
             {/* User section */}
-            <div className="p-4 border-t border-white/10">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center text-white font-medium text-sm">
-                  JS
+            <div className="relative p-4 border-t border-white/5">
+              <div className="flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 transition-colors cursor-pointer">
+                <div className="relative">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                    JS
+                  </div>
+                  <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 rounded-full border-2 border-slate-900" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-white truncate">John Smith</p>
-                  <p className="text-xs text-white/60 truncate">System Admin</p>
+                  <p className="text-sm font-semibold text-white truncate">John Smith</p>
+                  <p className="text-xs text-white/50 truncate">System Admin</p>
                 </div>
+                <ChevronDownIcon className="w-4 h-4 text-white/40" />
               </div>
             </div>
           </aside>
@@ -221,28 +290,36 @@ export default function DashboardLayout({
           {/* Main content area */}
           <div className="flex-1 flex flex-col overflow-hidden">
             {/* Top header bar */}
-            <header className="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-6">
-              <div className="flex items-center gap-4">
-                <h1 className="text-lg font-semibold text-slate-900">
-                  {pathname === '/dashboard' && 'Dashboard'}
-                  {pathname.startsWith('/dashboard/claims') && 'Claims'}
-                  {pathname.startsWith('/dashboard/clients') && 'Clients'}
-                  {pathname.startsWith('/dashboard/repricing') && 'Repricing'}
-                  {pathname.startsWith('/dashboard/reports') && 'Reports'}
-                  {pathname.startsWith('/dashboard/settings') && 'Settings'}
-                  {pathname.startsWith('/dashboard/audit') && 'Audit Log'}
-                </h1>
+            <header className="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-8">
+              <div className="flex items-center gap-4 flex-1">
+                {/* Search */}
+                <div className="relative max-w-md flex-1">
+                  <SearchIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                  <input
+                    type="text"
+                    placeholder="Search claims, clients, reports..."
+                    className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white transition-all"
+                  />
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1 px-2 py-1 bg-slate-200/50 rounded-md">
+                    <span className="text-[10px] text-slate-500 font-medium">⌘K</span>
+                  </div>
+                </div>
               </div>
               
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3">
+                {/* Quick actions */}
+                <button className="px-4 py-2.5 bg-primary text-white text-sm font-medium rounded-xl hover:bg-primary-dark transition-colors shadow-lg shadow-primary/20">
+                  + New Claim
+                </button>
+                
                 {/* Notifications */}
-                <button className="relative p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors">
+                <button className="relative p-3 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition-all">
                   <BellIcon className="w-5 h-5" />
-                  <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full" />
+                  <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full ring-2 ring-white" />
                 </button>
                 
                 {/* Date */}
-                <div className="text-sm text-slate-500">
+                <div className="text-sm text-slate-500 pl-4 border-l border-slate-200">
                   {new Date().toLocaleDateString('en-US', { 
                     weekday: 'short',
                     month: 'short', 
@@ -254,7 +331,7 @@ export default function DashboardLayout({
             </header>
             
             {/* Page content */}
-            <main className="flex-1 overflow-y-auto bg-slate-50 p-6">
+            <main className="flex-1 overflow-y-auto bg-slate-50/50 p-8">
               {children}
             </main>
           </div>
