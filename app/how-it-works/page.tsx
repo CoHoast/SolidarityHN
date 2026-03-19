@@ -41,6 +41,7 @@ const coreServices = [
       "Employee Communication",
     ],
     color: "from-blue-500 to-blue-600",
+    image: "/doctor-tablet.jpg",
   },
   {
     icon: Network,
@@ -56,6 +57,7 @@ const coreServices = [
       "Provider Directory Management",
     ],
     color: "from-cyan-500 to-teal-500",
+    image: "/doctors-trio.jpg",
   },
   {
     icon: Brain,
@@ -71,6 +73,7 @@ const coreServices = [
       "Appeals Management",
     ],
     color: "from-purple-500 to-indigo-500",
+    image: "/team-reviewing.jpg",
   },
   {
     icon: Calculator,
@@ -86,6 +89,7 @@ const coreServices = [
       "Savings Analytics Dashboard",
     ],
     color: "from-orange-500 to-red-500",
+    image: "/doctor-clipboard.jpg",
   },
 ];
 
@@ -105,21 +109,25 @@ const processSteps = [
     step: "01",
     title: "Discovery",
     description: "We learn about your organization, current benefits, and goals to understand your unique needs.",
+    image: "/doctor-portrait-2.jpg",
   },
   {
     step: "02",
     title: "Solution Design",
     description: "Our experts design a customized benefit solution tailored specifically for your workforce.",
+    image: "/doctor-tablet.jpg",
   },
   {
     step: "03",
     title: "Implementation",
     description: "Seamless transition with dedicated support to ensure a smooth launch of your new benefits.",
+    image: "/team-reviewing.jpg",
   },
   {
     step: "04",
     title: "Ongoing Partnership",
     description: "Continuous optimization, support, and strategic guidance to maximize your benefits investment.",
+    image: "/doctors-trio.jpg",
   },
 ];
 
@@ -136,8 +144,12 @@ export default function HowItWorksPage() {
       <MarketingHeader />
 
       {/* Hero */}
-      <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white py-20 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <img src="/doctors-trio.jpg" alt="" className="w-full h-full object-cover" />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/90 to-transparent"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -179,7 +191,7 @@ export default function HowItWorksPage() {
         </div>
       </section>
 
-      {/* Core Services */}
+      {/* Core Services with Images */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -187,14 +199,14 @@ export default function HowItWorksPage() {
             <p className="text-xl text-slate-600">Comprehensive services for all your benefit needs</p>
           </div>
 
-          <div className="space-y-12">
+          <div className="space-y-20">
             {coreServices.map((service, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className={`grid lg:grid-cols-2 gap-8 items-center ${i % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}
+                className="grid lg:grid-cols-2 gap-12 items-center"
               >
                 <div className={i % 2 === 1 ? 'lg:order-2' : ''}>
                   <div className={`w-14 h-14 bg-gradient-to-br ${service.color} rounded-xl flex items-center justify-center mb-6`}>
@@ -212,12 +224,12 @@ export default function HowItWorksPage() {
                     ))}
                   </div>
                 </div>
-                <div className={`bg-gradient-to-br ${service.color} rounded-2xl p-8 ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
-                  <div className="bg-white/10 backdrop-blur rounded-xl p-6 text-white">
-                    <service.icon className="w-16 h-16 mb-4 opacity-80" />
-                    <h4 className="text-xl font-bold mb-2">{service.title}</h4>
-                    <p className="text-white/80">{service.subtitle}</p>
-                  </div>
+                <div className={i % 2 === 1 ? 'lg:order-1' : ''}>
+                  <img 
+                    src={service.image} 
+                    alt={service.title}
+                    className="rounded-2xl shadow-xl w-full h-80 object-cover"
+                  />
                 </div>
               </motion.div>
             ))}
@@ -252,7 +264,7 @@ export default function HowItWorksPage() {
         </div>
       </section>
 
-      {/* Process */}
+      {/* Process with Images */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -260,7 +272,7 @@ export default function HowItWorksPage() {
             <p className="text-xl text-slate-600">A partnership built on trust and results</p>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {processSteps.map((step, i) => (
               <motion.div
                 key={i}
@@ -268,14 +280,20 @@ export default function HowItWorksPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="relative"
+                className="relative bg-slate-50 rounded-2xl overflow-hidden"
               >
-                {i < processSteps.length - 1 && (
-                  <div className="hidden md:block absolute top-8 left-full w-full h-0.5 bg-gradient-to-r from-blue-500 to-transparent -translate-x-4" />
-                )}
-                <div className="text-5xl font-bold text-blue-100 mb-4">{step.step}</div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2">{step.title}</h3>
-                <p className="text-slate-600">{step.description}</p>
+                <div className="h-40 overflow-hidden">
+                  <img 
+                    src={step.image} 
+                    alt={step.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-6">
+                  <div className="text-4xl font-bold text-blue-100 mb-2">{step.step}</div>
+                  <h3 className="text-lg font-bold text-slate-900 mb-2">{step.title}</h3>
+                  <p className="text-slate-600 text-sm">{step.description}</p>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -283,8 +301,11 @@ export default function HowItWorksPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-cyan-600 text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="py-20 bg-gradient-to-r from-blue-600 to-cyan-600 text-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <img src="/happy-family.jpg" alt="" className="w-full h-full object-cover" />
+        </div>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
           <h2 className="text-3xl font-bold mb-6">Ready to Get Started?</h2>
           <p className="text-xl text-blue-100 mb-8">
             Let's discuss how our services can help your organization reduce costs and improve benefits.

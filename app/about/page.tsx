@@ -55,11 +55,13 @@ const leadership = [
     name: "Anne Glorioso",
     role: "President & CEO",
     description: "A high energy professional with a 'can do' attitude. Anne surrounds herself with like-minded professionals and has a keen insight into the benefits industry. With decades of experience, she leads SHN with commitment, integrity, and meticulous attention to detail.",
+    image: "/doctor-tablet.jpg",
   },
   {
     name: "Alexandra Szczepaniak",
     role: "Chief Operating Officer",
     description: "Extremely detail-oriented and dedicated to operational excellence. Alexandra ensures SHN delivers meticulous work with accuracy and efficiency. Known for her positive attitude and respectful approach, she leads operations with professionalism.",
+    image: "/doctor-portrait-1.jpg",
   },
 ];
 
@@ -69,8 +71,12 @@ export default function AboutPage() {
       <MarketingHeader />
 
       {/* Hero */}
-      <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white py-20 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <img src="/medical-team-large.jpg" alt="" className="w-full h-full object-cover" />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/90 to-transparent"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -91,7 +97,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Mission */}
+      {/* Mission with Image */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -116,19 +122,25 @@ export default function AboutPage() {
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="grid grid-cols-2 gap-6"
             >
-              {[
-                { label: "Years Experience", value: "35+" },
-                { label: "Organizations", value: "500+" },
-                { label: "Members Served", value: "100K+" },
-                { label: "Client Retention", value: "99%" },
-              ].map((stat, i) => (
-                <div key={i} className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 text-center border border-blue-100">
-                  <p className="text-3xl font-bold text-blue-600">{stat.value}</p>
-                  <p className="text-slate-600">{stat.label}</p>
-                </div>
-              ))}
+              <img 
+                src="/doctor-patient-care.jpg" 
+                alt="Quality patient care" 
+                className="rounded-2xl shadow-xl w-full"
+              />
+              <div className="grid grid-cols-2 gap-4 mt-6">
+                {[
+                  { label: "Years Experience", value: "35+" },
+                  { label: "Organizations", value: "500+" },
+                  { label: "Members Served", value: "100K+" },
+                  { label: "Client Retention", value: "99%" },
+                ].map((stat, i) => (
+                  <div key={i} className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-4 text-center border border-blue-100">
+                    <p className="text-2xl font-bold text-blue-600">{stat.value}</p>
+                    <p className="text-slate-600 text-sm">{stat.label}</p>
+                  </div>
+                ))}
+              </div>
             </motion.div>
           </div>
         </div>
@@ -163,7 +175,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Leadership */}
+      {/* Leadership with Images */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
@@ -179,12 +191,16 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-8 border border-slate-200"
+                className="bg-gradient-to-br from-slate-50 to-white rounded-2xl overflow-hidden border border-slate-200"
               >
-                <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mb-6 mx-auto">
-                  <span className="text-2xl font-bold text-white">{leader.name.split(' ').map(n => n[0]).join('')}</span>
+                <div className="h-64 overflow-hidden">
+                  <img 
+                    src={leader.image} 
+                    alt={leader.name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-                <div className="text-center">
+                <div className="p-6">
                   <h3 className="text-xl font-bold text-slate-900">{leader.name}</h3>
                   <p className="text-blue-600 font-medium mb-4">{leader.role}</p>
                   <p className="text-slate-600 text-sm">{leader.description}</p>
@@ -192,6 +208,27 @@ export default function AboutPage() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Team Photo */}
+      <section className="py-20 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">Our Extended Team</h2>
+            <p className="text-xl text-slate-600">A dedicated team of benefits professionals</p>
+          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <img 
+              src="/medical-team-large.jpg" 
+              alt="Our team" 
+              className="rounded-2xl shadow-xl w-full max-h-96 object-cover"
+            />
+          </motion.div>
         </div>
       </section>
 

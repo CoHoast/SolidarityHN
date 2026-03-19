@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import MarketingHeader from "@/components/marketing/Header";
 import MarketingFooter from "@/components/marketing/Footer";
 import {
@@ -46,72 +47,71 @@ const stats = [
   { label: "Client Retention", value: "99%", icon: Heart },
 ];
 
-const services = [
-  { icon: ClipboardCheck, title: "Benefit Administration", description: "Comprehensive benefit plan management and administration services." },
-  { icon: CreditCard, title: "Billing & Invoicing", description: "Accurate and timely billing solutions for all benefit plans." },
-  { icon: Users, title: "Retiree Health Care", description: "Specialized health care solutions for retiree populations." },
-  { icon: Shield, title: "Self-Funded Plans", description: "Custom self-funded plan design and management." },
-  { icon: FileText, title: "Claims Processing", description: "Efficient and accurate claims adjudication services." },
-  { icon: Pill, title: "Prescription Drug Benefits", description: "PBM services and drug benefit management." },
-];
-
 const coreServices = [
   {
     icon: ClipboardCheck,
     title: "BenefitsConnect™",
     subtitle: "Streamlined Benefit Management",
-    description: "From meticulous benefit planning to seamless implementation, smooth transitions, and a successful benefit launch. Our Eligibility Services ensure accuracy and efficiency, while our AI-powered tools streamline every process.",
+    description: "From meticulous benefit planning to seamless implementation, smooth transitions, and a successful benefit launch.",
     features: ["Plan Design & Implementation", "Eligibility Management", "COBRA Administration", "ACA Compliance"],
+    image: "/doctor-tablet.jpg",
   },
   {
     icon: Network,
     title: "PPO Network Services",
     subtitle: "Nationwide Provider Access",
-    description: "Access our extensive network of contracted providers with pre-negotiated rates. Our PPO network delivers significant savings on medical services while ensuring quality care for your members.",
+    description: "Access our extensive network of contracted providers with pre-negotiated rates delivering significant savings.",
     features: ["50,000+ Contracted Providers", "Pre-Negotiated Rates", "Network Analytics", "Provider Credentialing"],
+    image: "/doctors-trio.jpg",
   },
   {
     icon: Brain,
     title: "AI Bill Negotiation",
     subtitle: "Intelligent Cost Reduction",
-    description: "Our proprietary AI-powered bill negotiation system analyzes medical bills, identifies overcharges, and automatically negotiates fair prices with providers—saving an average of 40-60% on out-of-network claims.",
+    description: "Our AI-powered bill negotiation system analyzes medical bills and automatically negotiates fair prices—saving 40-60%.",
     features: ["Automated Bill Analysis", "Fair Price Calculation", "Provider Negotiation", "Real-Time Tracking"],
+    image: "/team-reviewing.jpg",
   },
   {
     icon: Calculator,
     title: "Claims Repricing",
     subtitle: "Maximum Savings on Every Claim",
-    description: "Advanced claims repricing technology that applies multiple pricing methodologies to ensure you pay fair and reasonable rates. Integrates seamlessly with your existing claims workflow.",
+    description: "Advanced claims repricing technology ensures you pay fair and reasonable rates on all medical claims.",
     features: ["Medicare-Based Repricing", "UCR Analysis", "Fee Schedule Management", "Audit & Compliance"],
+    image: "/doctor-clipboard.jpg",
   },
 ];
 
 const sectors = [
-  { icon: HardHat, title: "Labor Unions", description: "Comprehensive benefit solutions for union members and their families." },
-  { icon: Building, title: "Commercial Sector", description: "Tailored corporate benefit packages for businesses of all sizes." },
-  { icon: Scale, title: "Public Sector", description: "Specialized solutions for government and municipal employees." },
+  { icon: HardHat, title: "Labor Unions", description: "Comprehensive benefit solutions for union members and their families.", image: "/medical-team-large.jpg" },
+  { icon: Building, title: "Commercial Sector", description: "Tailored corporate benefit packages for businesses of all sizes.", image: "/doctor-portrait-1.jpg" },
+  { icon: Scale, title: "Public Sector", description: "Specialized solutions for government and municipal employees.", image: "/doctor-portrait-2.jpg" },
 ];
 
 const testimonials = [
   {
-    quote: "Anne is a high energy professional with a 'can do' attitude who surrounds herself with like minded professionals. She has a keen insight to all the twists and turns along the way. It would be a pleasure to work with Anne in the future.",
+    quote: "Anne is a high energy professional with a 'can do' attitude who surrounds herself with like minded professionals. She has a keen insight to all the twists and turns along the way.",
     author: "Industry Partner",
     role: "Healthcare Executive",
+    image: "/doctor-tablet.jpg",
   },
   {
-    quote: "Outstanding. Extremely knowledgeable about medical claims and the insurance industry. She has the highest morals and is a woman of great integrity. She is awesome to work with.",
+    quote: "Outstanding. Extremely knowledgeable about medical claims and the insurance industry. She has the highest morals and is a woman of great integrity.",
     author: "Aimee Fagan",
     role: "Head of North American A&H Claims, Swiss Re",
+    image: "/doctor-portrait-1.jpg",
   },
   {
-    quote: "SHN performs a full scope of services as our third party administrator. On all fronts, SHN has exceeded expectations in terms of commitment, timeliness and accuracy. We view SHN as an extension of our staff.",
+    quote: "SHN performs a full scope of services as our third party administrator. On all fronts, SHN has exceeded expectations in terms of commitment, timeliness and accuracy.",
     author: "Christine F. Fleps",
     role: "Director of Benefits, Cleveland Cliffs",
+    image: "/doctor-portrait-2.jpg",
   },
   {
     quote: "Alexandra is extremely detail oriented. She is dedicated, knowledgeable and hard working. She has a positive attitude and speaks respectfully to all.",
     author: "Aimee Fagan",
     role: "Head of North American A&H Claims, Swiss Re",
+    image: "/doctors-trio.jpg",
   },
 ];
 
@@ -165,14 +165,19 @@ export default function HomePage() {
     <div className="min-h-screen bg-white">
       <MarketingHeader />
 
-      {/* Hero Section */}
+      {/* Hero Section with Image */}
       <section className="relative bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")" }}></div>
+        <div className="absolute inset-0">
+          <img 
+            src="/happy-family.jpg" 
+            alt="Happy family" 
+            className="w-full h-full object-cover opacity-20"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/90 to-slate-900/70"></div>
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 relative">
-          <div className="max-w-4xl">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -205,6 +210,19 @@ export default function HomePage() {
                 </Link>
               </div>
             </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="hidden lg:block"
+            >
+              <img 
+                src="/happy-family.jpg" 
+                alt="Happy family with health coverage" 
+                className="rounded-2xl shadow-2xl shadow-black/30 border border-white/10"
+              />
+            </motion.div>
           </div>
 
           {/* Stats */}
@@ -225,13 +243,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Who We Serve */}
+      {/* Who We Serve with Images */}
       <section className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Who We Serve</h2>
             <p className="text-xl text-slate-600">Trusted by Organizations Across Every Sector</p>
-            <p className="text-slate-500 mt-2">From labor unions to Fortune 500 companies, we deliver tailored benefit solutions that meet the unique needs of each organization we serve.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -242,13 +259,22 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-shadow border border-slate-100"
+                className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow border border-slate-100"
               >
-                <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center mb-6">
-                  <sector.icon className="w-7 h-7 text-white" />
+                <div className="h-48 overflow-hidden">
+                  <img 
+                    src={sector.image} 
+                    alt={sector.title}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  />
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">{sector.title}</h3>
-                <p className="text-slate-600">{sector.description}</p>
+                <div className="p-6">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center mb-4 -mt-12 relative z-10 shadow-lg">
+                    <sector.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-900 mb-2">{sector.title}</h3>
+                  <p className="text-slate-600">{sector.description}</p>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -259,45 +285,98 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Four Core Solutions */}
+      {/* Four Core Solutions with Images */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Four Core Solutions</h2>
             <p className="text-xl text-slate-600">For All Your Benefit Needs</p>
-            <p className="text-slate-500 mt-2 max-w-2xl mx-auto">Our four cornerstones of excellence form the foundation of our business model, setting us apart as your trusted partner.</p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="space-y-16">
             {coreServices.map((service, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-8 border border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all"
+                className={`grid lg:grid-cols-2 gap-12 items-center ${i % 2 === 1 ? '' : ''}`}
               >
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center shrink-0">
-                    <service.icon className="w-6 h-6 text-white" />
+                <div className={i % 2 === 1 ? 'lg:order-2' : ''}>
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center shrink-0">
+                      <service.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-slate-900">{service.title}</h3>
+                      <p className="text-blue-600 font-medium">{service.subtitle}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-slate-900">{service.title}</h3>
-                    <p className="text-blue-600 font-medium">{service.subtitle}</p>
+                  <p className="text-slate-600 mb-6 text-lg">{service.description}</p>
+                  <div className="grid grid-cols-2 gap-3">
+                    {service.features.map((feature, j) => (
+                      <div key={j} className="flex items-center gap-2 text-slate-700">
+                        <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />
+                        {feature}
+                      </div>
+                    ))}
                   </div>
                 </div>
-                <p className="text-slate-600 mb-6">{service.description}</p>
-                <div className="grid grid-cols-2 gap-2">
-                  {service.features.map((feature, j) => (
-                    <div key={j} className="flex items-center gap-2 text-sm text-slate-700">
-                      <CheckCircle2 className="w-4 h-4 text-green-500" />
-                      {feature}
-                    </div>
-                  ))}
+                <div className={i % 2 === 1 ? 'lg:order-1' : ''}>
+                  <img 
+                    src={service.image} 
+                    alt={service.title}
+                    className="rounded-2xl shadow-xl w-full h-80 object-cover"
+                  />
                 </div>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Retiree Care Section */}
+      <section className="py-20 bg-gradient-to-br from-blue-50 to-cyan-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <img 
+                src="/retiree-care.jpg" 
+                alt="Retiree healthcare" 
+                className="rounded-2xl shadow-xl"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 rounded-full text-blue-700 text-sm font-medium mb-4">
+                <Heart className="w-4 h-4" />
+                Specialized Care
+              </span>
+              <h2 className="text-3xl font-bold text-slate-900 mb-4">Retiree Health Care Solutions</h2>
+              <p className="text-lg text-slate-600 mb-6">
+                We understand the unique healthcare needs of retirees. Our specialized retiree benefit programs ensure your retired workforce receives the care they deserve while helping you manage costs effectively.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  "Retiree Drug Subsidy Administration",
+                  "Medicare Supplement Management",
+                  "Prescription Drug Benefits",
+                  "Retiree Drug Subsidy Recovery",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3 text-slate-700">
+                    <CheckCircle2 className="w-5 h-5 text-blue-500" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -325,6 +404,27 @@ export default function HomePage() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Team Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">Our Network of Providers</h2>
+            <p className="text-xl text-slate-600">50,000+ Contracted Healthcare Professionals</p>
+          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <img 
+              src="/medical-team-large.jpg" 
+              alt="Medical team" 
+              className="rounded-2xl shadow-xl w-full max-h-96 object-cover"
+            />
+          </motion.div>
         </div>
       </section>
 
@@ -400,9 +500,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-cyan-600 text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      {/* CTA with Image */}
+      <section className="py-20 bg-gradient-to-r from-blue-600 to-cyan-600 text-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <img src="/doctor-patient-care.jpg" alt="" className="w-full h-full object-cover" />
+        </div>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             Partner with Solidarity Health Network
           </h2>
