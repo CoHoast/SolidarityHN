@@ -52,10 +52,12 @@ export default function MarketingFooter() {
             <ul className="space-y-3">
               {[
                 { name: "About Us", href: "/about" },
-                { name: "Our Services", href: "/how-it-works" },
+                { name: "Our Team", href: "/team" },
+                { name: "Our Approach", href: "/approach" },
+                { name: "Our Impact", href: "/impact" },
+                { name: "Partnerships", href: "/partnerships" },
+                { name: "Blog", href: "/blog" },
                 { name: "Contact Us", href: "/contact" },
-                { name: "Privacy Policy", href: "/privacy" },
-                { name: "Terms of Service", href: "/terms" },
               ].map((link) => (
                 <li key={link.name}>
                   <Link href={link.href} className="text-slate-400 hover:text-blue-400 transition-colors">

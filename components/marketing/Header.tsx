@@ -6,7 +6,12 @@ import { Menu, X, Phone, ChevronDown } from "lucide-react";
 
 const navigation = [
   { name: "About", href: "/about" },
+  { name: "Team", href: "/team" },
   { name: "Services", href: "/how-it-works" },
+  { name: "Approach", href: "/approach" },
+  { name: "Impact", href: "/impact" },
+  { name: "Partnerships", href: "/partnerships" },
+  { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
 ];
 
