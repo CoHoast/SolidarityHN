@@ -201,25 +201,25 @@ export default function TeamPage() {
             <p className="text-slate-600">US-based support dedicated to your members</p>
           </div>
 
-          <div className="grid md:grid-cols-4 lg:grid-cols-8 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
             {serviceTeam.map((member, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.03 }}
-                className="bg-white rounded-xl p-4 border border-slate-100 text-center"
+                transition={{ delay: i * 0.05 }}
+                className="bg-gradient-to-br from-slate-50 to-white rounded-xl p-6 border border-slate-100 text-center"
               >
-                <div className="w-16 h-16 rounded-full overflow-hidden mx-auto mb-3 bg-slate-100">
+                <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 bg-slate-100">
                   <img
                     src={member.image}
                     alt={member.name}
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <h3 className="font-semibold text-slate-900 text-sm">{member.name}</h3>
-                <p className="text-xs text-slate-500 mt-1">{member.role}</p>
+                <h3 className="font-bold text-slate-900 text-sm">{member.name}</h3>
+                <p className="text-xs text-slate-600 mt-1">{member.role}</p>
               </motion.div>
             ))}
           </div>
