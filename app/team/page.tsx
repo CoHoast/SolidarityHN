@@ -4,57 +4,57 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import MarketingHeader from "@/components/marketing/Header";
 import MarketingFooter from "@/components/marketing/Footer";
-import { Award, Users, Mail, Phone, Linkedin, ArrowRight } from "lucide-react";
+import { Award, Users, ArrowRight } from "lucide-react";
 
 const executiveTeam = [
   {
     name: "Anne M. Glorioso",
     role: "President & CEO",
     description: "A high energy professional with a 'can do' attitude. Anne has a keen insight into the benefits industry with decades of experience leading SHN with commitment, integrity, and meticulous attention to detail.",
-    image: "/doctor-tablet.jpg",
+    image: "/team/anne-glorioso.jpg",
   },
   {
     name: "Alexandra (Allie) Szczepaniak",
     role: "Chief Operating Officer",
     description: "Extremely detail-oriented and dedicated to operational excellence. Alexandra ensures SHN delivers meticulous work with accuracy and efficiency, leading operations with professionalism.",
-    image: "/doctor-portrait-1.jpg",
+    image: "/team/alexandra-szczepaniak.jpg",
   },
   {
     name: "Anthony J. Mangoni",
     role: "Founder / Chairman of the Board",
     description: "Visionary founder who established SHN in 1989. Anthony's leadership and vision have shaped the company into a trusted partner for organizations across every sector.",
-    image: "/doctors-trio.jpg",
+    image: "/team/anthony-mangoni.jpg",
   },
   {
     name: "Kathleen Caudill",
     role: "Senior Director of Operations",
     description: "Oversees day-to-day operations ensuring seamless service delivery. Kathleen brings extensive experience in benefits administration and operational management.",
-    image: "/doctor-portrait-2.jpg",
+    image: "/team/kathleen-caudill.jpg",
   },
 ];
 
 const accountManagement = [
-  { name: "Marie Vitali", role: "Account Manager & Certified Payroll Specialist" },
-  { name: "Helen Crawford", role: "Senior Account Manager" },
+  { name: "Marie Vitali", role: "Account Manager & Certified Payroll Specialist", image: "/team/marie-vitali.jpg" },
+  { name: "Helen Crawford", role: "Senior Account Manager", image: "/team/helen-crawford.jpg" },
 ];
 
 const salesTeam = [
-  { name: "Joseph Marcoguiseppe", role: "Vice President of Marketing & Business Development" },
-  { name: "Christian Nawrocki", role: "Licensed Agent & Benefits Specialist" },
-  { name: "Robert Glorioso", role: "Licensed Labor Liaison" },
-  { name: "Mike Szczepaniak", role: "Licensed Agent & Project Manager" },
-  { name: "Virgil Glorioso", role: "Marketing & Social Media Liaison" },
+  { name: "Joseph Marcoguiseppe", role: "Vice President of Marketing & Business Development", image: "/team/joseph-marcoguiseppe.jpg" },
+  { name: "Christian Nawrocki", role: "Licensed Agent & Benefits Specialist", image: "/team/christian-nawrocki.jpg" },
+  { name: "Robert Glorioso", role: "Licensed Labor Liaison", image: "/team/robert-glorioso.jpg" },
+  { name: "Mike Szczepaniak", role: "Licensed Agent & Project Manager", image: "/team/mike-szczepaniak.jpg" },
+  { name: "Virgil Glorioso", role: "Marketing & Social Media Liaison", image: "/team/virgil-glorioso.jpg" },
 ];
 
 const serviceTeam = [
-  { name: "Kyle K.", role: "Director of Customer Service & Support" },
-  { name: "Matthew M.", role: "Lead Customer Service Representative" },
-  { name: "Jimmy B.", role: "Quality Assurance & Customer Care" },
-  { name: "Jeneen C.", role: "Executive Assistant" },
-  { name: "Doug H.", role: "Customer Service Representative" },
-  { name: "Toni B.", role: "Customer Service Representative" },
-  { name: "Evan B.", role: "Customer Service Representative" },
-  { name: "Dominic B.", role: "Customer Service Representative" },
+  { name: "Kyle K.", role: "Director of Customer Service & Support", image: "/team/kyle-k.jpg" },
+  { name: "Matthew M.", role: "Lead Customer Service Representative", image: "/team/matthew-m.jpg" },
+  { name: "Jimmy B.", role: "Quality Assurance & Customer Care", image: "/team/jimmy-b.jpg" },
+  { name: "Jeneen C.", role: "Executive Assistant", image: "/team/jeneen-c.jpg" },
+  { name: "Doug H.", role: "Customer Service Representative", image: "/team/doug-h.jpg" },
+  { name: "Toni B.", role: "Customer Service Representative", image: "/team/toni-b.jpg" },
+  { name: "Evan B.", role: "Customer Service Representative", image: "/team/evan-b.jpg" },
+  { name: "Dominic B.", role: "Customer Service Representative", image: null },
 ];
 
 export default function TeamPage() {
@@ -64,10 +64,10 @@ export default function TeamPage() {
 
       {/* Hero */}
       <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white py-20 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <img src="/medical-team-large.jpg" alt="" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 opacity-30">
+          <img src="/team/team-photo.jpg" alt="" className="w-full h-full object-cover" />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/90 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/90 to-slate-900/70"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -107,11 +107,11 @@ export default function TeamPage() {
                 transition={{ delay: i * 0.1 }}
                 className="bg-white rounded-2xl overflow-hidden shadow-lg border border-slate-100 hover:shadow-xl transition-shadow"
               >
-                <div className="h-56 overflow-hidden">
+                <div className="h-64 overflow-hidden bg-slate-100">
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-top"
                   />
                 </div>
                 <div className="p-6">
@@ -133,7 +133,7 @@ export default function TeamPage() {
             <p className="text-slate-600">Your dedicated partners in benefits administration</p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
             {accountManagement.map((member, i) => (
               <motion.div
                 key={i}
@@ -143,8 +143,12 @@ export default function TeamPage() {
                 transition={{ delay: i * 0.1 }}
                 className="bg-white rounded-xl p-6 shadow-sm border border-slate-100 flex items-center gap-4"
               >
-                <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                  {member.name.split(' ').map(n => n[0]).join('')}
+                <div className="w-20 h-20 rounded-full overflow-hidden bg-slate-100 shrink-0">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div>
                   <h3 className="font-bold text-slate-900">{member.name}</h3>
@@ -174,8 +178,12 @@ export default function TeamPage() {
                 transition={{ delay: i * 0.05 }}
                 className="bg-gradient-to-br from-slate-50 to-white rounded-xl p-6 border border-slate-100 text-center"
               >
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-4">
-                  {member.name.split(' ').map(n => n[0]).join('')}
+                <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 bg-slate-100">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <h3 className="font-bold text-slate-900 text-sm">{member.name}</h3>
                 <p className="text-xs text-slate-600 mt-1">{member.role}</p>
@@ -203,9 +211,19 @@ export default function TeamPage() {
                 transition={{ delay: i * 0.03 }}
                 className="bg-white rounded-xl p-4 border border-slate-100 text-center"
               >
-                <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-teal-500 rounded-full flex items-center justify-center text-white font-bold mx-auto mb-3">
-                  {member.name.split(' ').map(n => n[0]).join('')}
-                </div>
+                {member.image ? (
+                  <div className="w-16 h-16 rounded-full overflow-hidden mx-auto mb-3 bg-slate-100">
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ) : (
+                  <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-teal-500 rounded-full flex items-center justify-center text-white font-bold mx-auto mb-3">
+                    {member.name.split(' ').map(n => n[0]).join('')}
+                  </div>
+                )}
                 <h3 className="font-semibold text-slate-900 text-sm">{member.name}</h3>
                 <p className="text-xs text-slate-500 mt-1">{member.role}</p>
               </motion.div>
@@ -223,9 +241,9 @@ export default function TeamPage() {
             viewport={{ once: true }}
           >
             <img
-              src="/medical-team-large.jpg"
-              alt="Our team"
-              className="rounded-2xl shadow-xl w-full max-h-96 object-cover"
+              src="/team/team-photo.jpg"
+              alt="The Solidarity Health Network Team"
+              className="rounded-2xl shadow-xl w-full"
             />
           </motion.div>
           <div className="text-center mt-8">
