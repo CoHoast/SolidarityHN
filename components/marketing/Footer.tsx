@@ -11,7 +11,7 @@ export default function MarketingFooter() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-6">
-              <img src="/solidarity-logo.png" alt="Solidarity Health Network" className="h-12 w-auto" />
+              <img src="/solidarity-logo-white.png" alt="Solidarity Health Network" className="h-12 w-auto" />
             </div>
             <p className="text-slate-400 mb-6">
               Your trusted partner in total benefits solutions since 1989. Empowering your workforce, enriching your future.
