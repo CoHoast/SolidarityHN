@@ -30,16 +30,16 @@ export default function MarketingFooter() {
             <h4 className="font-semibold text-white mb-4">Our Services</h4>
             <ul className="space-y-3">
               {[
-                "Benefit Administration",
-                "PPO Network Services",
-                "AI Bill Negotiation",
-                "Claims Repricing",
-                "Retiree Health Care",
-                "Self-Funded Plans",
+                { name: "Benefit Administration", href: "/services/benefit-administration" },
+                { name: "PPO Network Services", href: "/services/ppo-network" },
+                { name: "AI Bill Negotiation", href: "/services/ai-bill-negotiation" },
+                { name: "Claims Repricing", href: "/services/claims-repricing" },
+                { name: "Retiree Health Care", href: "/services/retiree-health-care" },
+                { name: "Self-Funded Plans", href: "/services/self-funded-plans" },
               ].map((service) => (
-                <li key={service}>
-                  <Link href="/how-it-works" className="text-slate-400 hover:text-blue-400 transition-colors">
-                    {service}
+                <li key={service.name}>
+                  <Link href={service.href} className="text-slate-400 hover:text-blue-400 transition-colors">
+                    {service.name}
                   </Link>
                 </li>
               ))}
