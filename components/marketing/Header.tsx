@@ -4,10 +4,19 @@ import { useState } from "react";
 import Link from "next/link";
 import { Menu, X, Phone, ChevronDown } from "lucide-react";
 
+const services = [
+  { name: "Benefit Administration", href: "/services/benefit-administration" },
+  { name: "PPO Network Services", href: "/services/ppo-network" },
+  { name: "AI Bill Negotiation", href: "/services/ai-bill-negotiation" },
+  { name: "Claims Repricing", href: "/services/claims-repricing" },
+  { name: "Retiree Health Care", href: "/services/retiree-health-care" },
+  { name: "Self-Funded Plans", href: "/services/self-funded-plans" },
+];
+
 const navigation = [
   { name: "About", href: "/about" },
   { name: "Team", href: "/team" },
-  { name: "Services", href: "/how-it-works" },
+  { name: "Services", href: "#", hasDropdown: true },
   { name: "Approach", href: "/approach" },
   { name: "Impact", href: "/impact" },
   { name: "Partnerships", href: "/partnerships" },
@@ -17,6 +26,8 @@ const navigation = [
 
 export default function MarketingHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
@@ -48,13 +59,44 @@ export default function MarketingHeader() {
           {/* Desktop nav */}
           <div className="hidden lg:flex items-center gap-8">
             {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-gray-600 hover:text-blue-600 font-medium transition-colors"
-              >
-                {item.name}
-              </Link>
+              item.hasDropdown ? (
+                <div
+                  key={item.name}
+                  className="relative"
+                  onMouseEnter={() => setServicesOpen(true)}
+                  onMouseLeave={() => setServicesOpen(false)}
+                >
+                  <button className="flex items-center gap-1 text-gray-600 hover:text-blue-600 font-medium transition-colors">
+                    {item.name}
+                    <ChevronDown className={`w-4 h-4 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  
+                  {/* Dropdown */}
+                  {servicesOpen && (
+                    <div className="absolute top-full left-0 pt-2 w-64">
+                      <div className="bg-white rounded-xl shadow-xl border border-gray-100 py-2 overflow-hidden">
+                        {services.map((service) => (
+                          <Link
+                            key={service.name}
+                            href={service.href}
+                            className="block px-4 py-2.5 text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+                          >
+                            {service.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="text-gray-600 hover:text-blue-600 font-medium transition-colors"
+                >
+                  {item.name}
+                </Link>
+              )
             ))}
           </div>
 
@@ -82,14 +124,40 @@ export default function MarketingHeader() {
           <div className="lg:hidden mt-4 pb-4 border-t border-gray-100 pt-4">
             <div className="space-y-2">
               {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
+                item.hasDropdown ? (
+                  <div key={item.name}>
+                    <button
+                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                      className="flex items-center justify-between w-full px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium"
+                    >
+                      {item.name}
+                      <ChevronDown className={`w-4 h-4 transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileServicesOpen && (
+                      <div className="ml-4 mt-1 space-y-1 border-l-2 border-blue-100 pl-4">
+                        {services.map((service) => (
+                          <Link
+                            key={service.name}
+                            href={service.href}
+                            className="block px-4 py-2 text-gray-500 hover:text-blue-600 rounded-lg text-sm"
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            {service.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                )
               ))}
               <Link
                 href="/contact"
