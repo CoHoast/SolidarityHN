@@ -54,7 +54,7 @@ const serviceTeam = [
   { name: "Doug H.", role: "Customer Service Representative", image: "/team/doug-h.jpg" },
   { name: "Toni B.", role: "Customer Service Representative", image: "/team/toni-b.jpg" },
   { name: "Evan B.", role: "Customer Service Representative", image: "/team/evan-b.jpg" },
-  { name: "Dominic B.", role: "Customer Service Representative", image: null },
+  { name: "Dominic B.", role: "Customer Service Representative", image: "/team/dominic-b.jpg" },
 ];
 
 export default function TeamPage() {
@@ -211,19 +211,13 @@ export default function TeamPage() {
                 transition={{ delay: i * 0.03 }}
                 className="bg-white rounded-xl p-4 border border-slate-100 text-center"
               >
-                {member.image ? (
-                  <div className="w-16 h-16 rounded-full overflow-hidden mx-auto mb-3 bg-slate-100">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ) : (
-                  <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-teal-500 rounded-full flex items-center justify-center text-white font-bold mx-auto mb-3">
-                    {member.name.split(' ').map(n => n[0]).join('')}
-                  </div>
-                )}
+                <div className="w-16 h-16 rounded-full overflow-hidden mx-auto mb-3 bg-slate-100">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
                 <h3 className="font-semibold text-slate-900 text-sm">{member.name}</h3>
                 <p className="text-xs text-slate-500 mt-1">{member.role}</p>
               </motion.div>
