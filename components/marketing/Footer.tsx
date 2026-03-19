@@ -11,11 +11,11 @@ export default function MarketingFooter() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-6">
-              <img src="/truecare-logo.png" alt="TrueCare Health Network" className="h-12 w-auto" />
+              <img src="/solidarity-logo.png" alt="Solidarity Health Network" className="h-12 w-auto" />
             </div>
             <p className="text-sky-300 mb-6 max-w-sm">
-              Quality healthcare made affordable. Join our network of 50,000+ providers 
-              and start saving up to 40% on medical expenses.
+              Your trusted partner in healthcare cost containment since 1989. Delivering 
+              exceptional benefit solutions for organizations across every sector.
             </p>
             <div className="flex gap-4">
               {[Facebook, Twitter, Linkedin, Instagram].map((Icon, i) => (
@@ -80,7 +80,7 @@ export default function MarketingFooter() {
               <li className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-teal-400 shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-white">support@truecarehealth.com</p>
+                  <p className="text-white">info@shninc.org</p>
                 </div>
               </li>
               <li className="flex items-start gap-3">
@@ -100,7 +100,7 @@ export default function MarketingFooter() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sky-300 text-sm">
-              © 2026 TrueCare Health Network. All rights reserved.
+              © 2026 Solidarity Health Network. All rights reserved.
             </p>
             <div className="flex items-center gap-6 text-sm">
               <Link href="/privacy" className="text-sky-300 hover:text-teal-400 transition-colors">Privacy Policy</Link>
