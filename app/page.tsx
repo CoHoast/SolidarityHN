@@ -153,7 +153,6 @@ const allServices = [
   "Fringe Benefit Administration",
   "Annuity Administration",
   "Pension Administration",
-  "Call Center Services",
   "Genetic Testing for Rx Compatibility",
   "Retiree Drug Subsidy Administration",
 ];
