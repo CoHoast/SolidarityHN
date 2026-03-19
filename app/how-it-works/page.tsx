@@ -5,20 +5,130 @@ import Link from "next/link";
 import MarketingHeader from "@/components/marketing/Header";
 import MarketingFooter from "@/components/marketing/Footer";
 import {
-  Search,
-  CreditCard,
-  DollarSign,
-  CheckCircle2,
   ArrowRight,
+  CheckCircle2,
+  ClipboardCheck,
+  Network,
+  Brain,
+  Calculator,
   Users,
   Shield,
-  Clock,
-  FileText,
-  Phone,
-  Stethoscope,
+  Pill,
   Building2,
-  Star,
+  Phone,
+  FileText,
+  CreditCard,
+  Zap,
+  TrendingDown,
+  Clock,
+  Award,
+  Target,
+  BarChart3,
 } from "lucide-react";
+
+const coreServices = [
+  {
+    icon: ClipboardCheck,
+    title: "BenefitsConnect™",
+    subtitle: "Comprehensive Benefit Administration",
+    description: "From plan design to seamless implementation, we manage every aspect of your benefit programs with precision and care.",
+    features: [
+      "Benefit Plan Design & Implementation",
+      "Eligibility Management & Verification",
+      "COBRA Administration",
+      "ACA Compliance & Reporting",
+      "Open Enrollment Support",
+      "Employee Communication",
+    ],
+    color: "from-blue-500 to-blue-600",
+  },
+  {
+    icon: Network,
+    title: "PPO Network Services",
+    subtitle: "Nationwide Provider Access",
+    description: "Access our extensive network of contracted providers with pre-negotiated rates, delivering significant savings while ensuring quality care.",
+    features: [
+      "50,000+ Contracted Providers",
+      "Pre-Negotiated Discount Rates",
+      "Provider Credentialing",
+      "Network Analytics & Reporting",
+      "Geographic Coverage Analysis",
+      "Provider Directory Management",
+    ],
+    color: "from-cyan-500 to-teal-500",
+  },
+  {
+    icon: Brain,
+    title: "AI Bill Negotiation",
+    subtitle: "Intelligent Cost Reduction",
+    description: "Our proprietary AI-powered system analyzes medical bills, identifies overcharges, and automatically negotiates fair prices—saving 40-60% on average.",
+    features: [
+      "Automated Bill Analysis",
+      "Medicare-Based Fair Pricing",
+      "AI-Powered Provider Negotiation",
+      "Real-Time Status Tracking",
+      "Settlement Documentation",
+      "Appeals Management",
+    ],
+    color: "from-purple-500 to-indigo-500",
+  },
+  {
+    icon: Calculator,
+    title: "Claims Repricing",
+    subtitle: "Maximum Savings on Every Claim",
+    description: "Advanced repricing technology applies multiple pricing methodologies to ensure you pay fair and reasonable rates on all claims.",
+    features: [
+      "Medicare-Based Repricing",
+      "UCR Analysis & Benchmarking",
+      "Custom Fee Schedule Management",
+      "Real-Time Repricing Engine",
+      "Audit & Compliance Tools",
+      "Savings Analytics Dashboard",
+    ],
+    color: "from-orange-500 to-red-500",
+  },
+];
+
+const additionalServices = [
+  { icon: Users, title: "Retiree Health Care", description: "Specialized health care solutions for retiree populations." },
+  { icon: Shield, title: "Self-Funded Plans", description: "Custom self-funded plan design and management." },
+  { icon: FileText, title: "Claims Processing", description: "Efficient and accurate claims adjudication." },
+  { icon: Pill, title: "Prescription Drug Benefits", description: "PBM services and drug benefit management." },
+  { icon: CreditCard, title: "Billing & Invoicing", description: "Accurate and timely billing solutions." },
+  { icon: Phone, title: "Call Center Services", description: "US-based support for your members." },
+  { icon: Building2, title: "Pension Administration", description: "Comprehensive pension management." },
+  { icon: BarChart3, title: "Benefit Audits", description: "Thorough audits to ensure compliance." },
+];
+
+const processSteps = [
+  {
+    step: "01",
+    title: "Discovery",
+    description: "We learn about your organization, current benefits, and goals to understand your unique needs.",
+  },
+  {
+    step: "02",
+    title: "Solution Design",
+    description: "Our experts design a customized benefit solution tailored specifically for your workforce.",
+  },
+  {
+    step: "03",
+    title: "Implementation",
+    description: "Seamless transition with dedicated support to ensure a smooth launch of your new benefits.",
+  },
+  {
+    step: "04",
+    title: "Ongoing Partnership",
+    description: "Continuous optimization, support, and strategic guidance to maximize your benefits investment.",
+  },
+];
+
+const savingsStats = [
+  { value: "40-60%", label: "Average Savings on Bill Negotiation" },
+  { value: "25-35%", label: "PPO Network Discount Rates" },
+  { value: "15-25%", label: "Claims Repricing Savings" },
+  { value: "99%", label: "Client Retention Rate" },
+];
 
 export default function HowItWorksPage() {
   return (
@@ -26,201 +136,166 @@ export default function HowItWorksPage() {
       <MarketingHeader />
 
       {/* Hero */}
-      <section className="relative bg-gradient-to-br from-slate-50 to-white py-20 lg:py-28 overflow-hidden">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-cyan-50 to-teal-50 rounded-full -translate-y-1/2 translate-x-1/3 opacity-60" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
+            className="max-w-3xl"
           >
-            <span className="inline-block px-4 py-1 bg-teal-50 text-cyan-700 rounded-full text-sm font-medium mb-4">
-              HOW IT WORKS
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/20 rounded-full text-blue-300 text-sm font-medium mb-6">
+              <Zap className="w-4 h-4" />
+              Our Services
             </span>
-            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6 max-w-3xl mx-auto">
-              Simple Steps to
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-teal-600">
-                Better Healthcare Savings
-              </span>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              Real Health Solutions
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400"> Accessible For All</span>
             </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Getting started with TrueCare Health Network is easy. 
-              Follow these simple steps to start saving on your healthcare today.
+            <p className="text-xl text-blue-100">
+              Four cornerstones of excellence form the foundation of our business model, setting us apart as your trusted partner in healthcare cost containment.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Steps */}
-      <section className="py-20 bg-white">
+      {/* Savings Stats */}
+      <section className="py-12 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-20">
-            {[
-              {
-                step: "01",
-                title: "Find an In-Network Provider",
-                description: "Use our easy search tool to find doctors, specialists, hospitals, and other healthcare providers in your area. Filter by specialty, location, ratings, and more.",
-                features: ["50,000+ providers nationwide", "Search by specialty or condition", "View ratings and reviews", "Check availability"],
-                image: "/doctor-tablet.jpg",
-                icon: Search,
-              },
-              {
-                step: "02",
-                title: "Show Your Member ID",
-                description: "At your appointment, present your TrueCare Health Network member ID card. Your provider will verify your network status and apply our negotiated rates.",
-                features: ["Digital ID available 24/7", "Instant verification", "No referrals needed", "Direct specialist access"],
-                image: "/doctor-patient-care.jpg",
-                icon: CreditCard,
-              },
-              {
-                step: "03",
-                title: "Save on Your Care",
-                description: "Pay reduced rates on your healthcare services. Our negotiated discounts mean you save up to 40% compared to standard rates—with no hidden fees.",
-                features: ["Up to 40% savings", "Transparent pricing", "No surprise bills", "Easy payment options"],
-                image: "/doctors-trio.jpg",
-                icon: DollarSign,
-              },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className={`grid lg:grid-cols-2 gap-12 items-center ${i % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}
-              >
-                <div className={i % 2 === 1 ? 'lg:order-2' : ''}>
-                  <div className="flex items-center gap-4 mb-6">
-                    <span className="text-6xl font-bold text-teal-100">{item.step}</span>
-                    <div className="w-14 h-14 bg-gradient-to-br from-cyan-400 to-teal-500 rounded-2xl flex items-center justify-center">
-                      <item.icon className="w-7 h-7 text-white" />
-                    </div>
-                  </div>
-                  <h3 className="text-3xl font-bold text-gray-900 mb-4">{item.title}</h3>
-                  <p className="text-lg text-gray-600 mb-6">{item.description}</p>
-                  <ul className="space-y-3">
-                    {item.features.map((feature, fi) => (
-                      <li key={fi} className="flex items-center gap-3">
-                        <CheckCircle2 className="w-5 h-5 text-cyan-600" />
-                        <span className="text-gray-700">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className={i % 2 === 1 ? 'lg:order-1' : ''}>
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="rounded-2xl shadow-xl w-full"
-                  />
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <span className="inline-block px-4 py-1 bg-teal-50 text-cyan-700 rounded-full text-sm font-medium mb-4">
-              MEMBER BENEFITS
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Why Members Love Us
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { icon: DollarSign, title: "Save Up to 40%", desc: "On medical expenses with negotiated rates" },
-              { icon: Users, title: "50,000+ Providers", desc: "Doctors, specialists, and hospitals" },
-              { icon: Shield, title: "Quality Assured", desc: "All providers are credentialed" },
-              { icon: Clock, title: "24/7 Support", desc: "We're always here to help" },
-            ].map((benefit, i) => (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {savingsStats.map((stat, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-white rounded-2xl p-6 border border-gray-100 text-center hover:shadow-lg transition-shadow"
+                className="text-center"
               >
-                <div className="w-14 h-14 bg-teal-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <benefit.icon className="w-7 h-7 text-cyan-600" />
-                </div>
-                <h3 className="font-bold text-gray-900 mb-2">{benefit.title}</h3>
-                <p className="text-gray-600 text-sm">{benefit.desc}</p>
+                <p className="text-3xl md:text-4xl font-bold text-blue-600">{stat.value}</p>
+                <p className="text-sm text-slate-600 mt-1">{stat.label}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* FAQ Preview */}
+      {/* Core Services */}
       <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <span className="inline-block px-4 py-1 bg-teal-50 text-cyan-700 rounded-full text-sm font-medium mb-4">
-              COMMON QUESTIONS
-            </span>
-            <h2 className="text-3xl font-bold text-gray-900">Quick Answers</h2>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Four Core Solutions</h2>
+            <p className="text-xl text-slate-600">Comprehensive services for all your benefit needs</p>
           </div>
 
-          <div className="space-y-6">
-            {[
-              {
-                q: "Do I need a referral to see a specialist?",
-                a: "No! You have direct access to any in-network specialist without needing a referral from your primary care physician.",
-              },
-              {
-                q: "How quickly can I start using my benefits?",
-                a: "Your benefits are active immediately upon enrollment. You can start finding providers and saving right away.",
-              },
-              {
-                q: "Can I use the network for any type of care?",
-                a: "Yes! Our network covers primary care, specialists, hospitals, labs, imaging, urgent care, and more across all 50 states.",
-              },
-            ].map((faq, i) => (
-              <div key={i} className="bg-gray-50 rounded-xl p-6">
-                <h4 className="font-bold text-gray-900 mb-2">{faq.q}</h4>
-                <p className="text-gray-600">{faq.a}</p>
-              </div>
+          <div className="space-y-12">
+            {coreServices.map((service, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className={`grid lg:grid-cols-2 gap-8 items-center ${i % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}
+              >
+                <div className={i % 2 === 1 ? 'lg:order-2' : ''}>
+                  <div className={`w-14 h-14 bg-gradient-to-br ${service.color} rounded-xl flex items-center justify-center mb-6`}>
+                    <service.icon className="w-7 h-7 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-slate-900 mb-2">{service.title}</h3>
+                  <p className="text-blue-600 font-medium mb-4">{service.subtitle}</p>
+                  <p className="text-slate-600 mb-6">{service.description}</p>
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    {service.features.map((feature, j) => (
+                      <div key={j} className="flex items-center gap-2 text-sm text-slate-700">
+                        <CheckCircle2 className="w-4 h-4 text-green-500 shrink-0" />
+                        {feature}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className={`bg-gradient-to-br ${service.color} rounded-2xl p-8 ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
+                  <div className="bg-white/10 backdrop-blur rounded-xl p-6 text-white">
+                    <service.icon className="w-16 h-16 mb-4 opacity-80" />
+                    <h4 className="text-xl font-bold mb-2">{service.title}</h4>
+                    <p className="text-white/80">{service.subtitle}</p>
+                  </div>
+                </div>
+              </motion.div>
             ))}
           </div>
+        </div>
+      </section>
 
-          <div className="text-center mt-8">
-            <Link href="/contact" className="text-cyan-600 font-medium hover:text-cyan-700">
-              Have more questions? Contact us →
-            </Link>
+      {/* Additional Services */}
+      <section className="py-20 bg-slate-900 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Additional Services</h2>
+            <p className="text-xl text-blue-300">Complete benefit solutions under one roof</p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {additionalServices.map((service, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05 }}
+                className="bg-white/5 rounded-xl p-6 border border-white/10 hover:bg-white/10 transition-colors"
+              >
+                <service.icon className="w-8 h-8 text-cyan-400 mb-4" />
+                <h3 className="font-bold text-white mb-2">{service.title}</h3>
+                <p className="text-sm text-slate-400">{service.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Process */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">How We Work Together</h2>
+            <p className="text-xl text-slate-600">A partnership built on trust and results</p>
+          </div>
+
+          <div className="grid md:grid-cols-4 gap-8">
+            {processSteps.map((step, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="relative"
+              >
+                {i < processSteps.length - 1 && (
+                  <div className="hidden md:block absolute top-8 left-full w-full h-0.5 bg-gradient-to-r from-blue-500 to-transparent -translate-x-4" />
+                )}
+                <div className="text-5xl font-bold text-blue-100 mb-4">{step.step}</div>
+                <h3 className="text-xl font-bold text-slate-900 mb-2">{step.title}</h3>
+                <p className="text-slate-600">{step.description}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-gradient-to-br from-cyan-500 to-teal-600">
+      <section className="py-20 bg-gradient-to-r from-blue-600 to-cyan-600 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-            Ready to Start Saving?
-          </h2>
-          <p className="text-xl text-teal-100 mb-10">
-            Join thousands of members who are already saving on their healthcare.
+          <h2 className="text-3xl font-bold mb-6">Ready to Get Started?</h2>
+          <p className="text-xl text-blue-100 mb-8">
+            Let's discuss how our services can help your organization reduce costs and improve benefits.
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link
-              href="/find-provider"
-              className="inline-flex items-center gap-2 px-8 py-4 text-lg font-semibold bg-white text-cyan-700 hover:bg-teal-50 rounded-xl shadow-lg transition-colors"
-            >
-              <Search className="w-5 h-5" />
-              Find a Provider
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 text-lg font-semibold text-white border-2 border-white/30 hover:bg-white/10 rounded-xl transition-colors"
-            >
-              <Phone className="w-5 h-5" />
-              Contact Us
-            </Link>
-          </div>
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-600 font-semibold rounded-xl hover:bg-blue-50 transition-all shadow-lg"
+          >
+            Contact Us Today
+            <ArrowRight className="w-5 h-5" />
+          </Link>
         </div>
       </section>
 

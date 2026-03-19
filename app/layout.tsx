@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "TrueCare Health Network | PPO Healthcare Network",
-  description: "Quality healthcare. Nationwide network. Real savings. Access 50,000+ providers and save up to 40% on healthcare costs.",
+  title: "Solidarity Health Network | Benefits Administration & Cost Containment",
+  description: "Your trusted partner in total benefits solutions since 1989. Benefit administration, PPO network services, AI bill negotiation, and claims repricing.",
 };
 
 export default function RootLayout({

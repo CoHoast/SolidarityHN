@@ -2,15 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X, Phone, ChevronDown, Search } from "lucide-react";
+import { Menu, X, Phone, ChevronDown } from "lucide-react";
 
 const navigation = [
   { name: "About", href: "/about" },
-  { name: "How It Works", href: "/how-it-works" },
-  { name: "Members", href: "/members" },
-  { name: "Providers", href: "/providers" },
-  { name: "Employers", href: "/employers" },
-  { name: "Find a Doctor", href: "/find-provider" },
+  { name: "Services", href: "/how-it-works" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -25,13 +21,13 @@ export default function MarketingHeader() {
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-2">
               <Phone className="w-4 h-4" />
-              1-800-555-0199
+              (216) 763-2484
             </span>
             <span className="hidden sm:inline text-slate-400">|</span>
-            <span className="hidden sm:inline">Provider Network Support</span>
+            <span className="hidden sm:inline">Cleveland, OH</span>
           </div>
           <div className="flex items-center gap-4">
-            <Link href="/admin-login" className="hover:text-teal-400 transition-colors">Admin Portal</Link>
+            <span className="text-blue-300">Trusted Partner Since 1989</span>
           </div>
         </div>
       </div>
@@ -50,7 +46,7 @@ export default function MarketingHeader() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-gray-600 hover:text-cyan-600 font-medium transition-colors"
+                className="text-gray-600 hover:text-blue-600 font-medium transition-colors"
               >
                 {item.name}
               </Link>
@@ -60,11 +56,10 @@ export default function MarketingHeader() {
           {/* CTA */}
           <div className="hidden lg:flex items-center gap-4">
             <Link
-              href="/find-provider"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-teal-600 text-white font-semibold rounded-lg hover:from-cyan-600 hover:to-teal-700 transition-all shadow-md shadow-cyan-500/20"
+              href="/contact"
+              className="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-blue-500 to-cyan-600 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-cyan-700 transition-all shadow-md shadow-blue-500/20"
             >
-              <Search className="w-4 h-4" />
-              Find a Provider
+              Get Started
             </Link>
           </div>
 
@@ -85,18 +80,18 @@ export default function MarketingHeader() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="block px-4 py-2 text-gray-600 hover:text-cyan-600 hover:bg-teal-50 rounded-lg font-medium"
+                  className="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.name}
                 </Link>
               ))}
               <Link
-                href="/find-provider"
-                className="block px-4 py-3 mt-4 text-center bg-gradient-to-r from-cyan-500 to-teal-600 text-white font-semibold rounded-lg"
+                href="/contact"
+                className="block px-4 py-3 mt-4 text-center bg-gradient-to-r from-blue-500 to-cyan-600 text-white font-semibold rounded-lg"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Find a Provider
+                Get Started
               </Link>
             </div>
           </div>

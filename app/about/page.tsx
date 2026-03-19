@@ -5,19 +5,63 @@ import Link from "next/link";
 import MarketingHeader from "@/components/marketing/Header";
 import MarketingFooter from "@/components/marketing/Footer";
 import {
-  Heart,
   Users,
   Award,
-  Target,
-  CheckCircle2,
-  ArrowRight,
+  Heart,
   Building2,
-  Globe,
-  Shield,
+  Target,
   Lightbulb,
-  Handshake,
-  TrendingUp,
+  Shield,
+  ArrowRight,
+  CheckCircle2,
+  Star,
 } from "lucide-react";
+
+const values = [
+  {
+    icon: Heart,
+    title: "Commitment to Excellence",
+    description: "We strive for excellence in every interaction, delivering superior service that exceeds expectations.",
+  },
+  {
+    icon: Users,
+    title: "Client-Centric Approach",
+    description: "Your unique needs drive our solutions. We tailor every benefit package to fit your organization perfectly.",
+  },
+  {
+    icon: Shield,
+    title: "Integrity & Trust",
+    description: "We operate with the highest morals and integrity, building lasting relationships based on trust.",
+  },
+  {
+    icon: Lightbulb,
+    title: "Innovation",
+    description: "We leverage cutting-edge technology and AI to revolutionize the benefits experience.",
+  },
+];
+
+const milestones = [
+  { year: "1989", event: "Founded in Cleveland, Ohio" },
+  { year: "1995", event: "Expanded to serve labor unions nationwide" },
+  { year: "2000", event: "100th organization served" },
+  { year: "2010", event: "Launched self-funded plan administration" },
+  { year: "2020", event: "Introduced AI-powered claims repricing" },
+  { year: "2024", event: "500+ organizations served" },
+  { year: "2025", event: "Launched AI Bill Negotiation platform" },
+];
+
+const leadership = [
+  {
+    name: "Anne Glorioso",
+    role: "President & CEO",
+    description: "A high energy professional with a 'can do' attitude. Anne surrounds herself with like-minded professionals and has a keen insight into the benefits industry. With decades of experience, she leads SHN with commitment, integrity, and meticulous attention to detail.",
+  },
+  {
+    name: "Alexandra Szczepaniak",
+    role: "Chief Operating Officer",
+    description: "Extremely detail-oriented and dedicated to operational excellence. Alexandra ensures SHN delivers meticulous work with accuracy and efficiency. Known for her positive attitude and respectful approach, she leads operations with professionalism.",
+  },
+];
 
 export default function AboutPage() {
   return (
@@ -25,161 +69,94 @@ export default function AboutPage() {
       <MarketingHeader />
 
       {/* Hero */}
-      <section className="relative bg-gradient-to-br from-slate-50 to-white py-20 lg:py-28 overflow-hidden">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-cyan-50 to-teal-50 rounded-full -translate-y-1/2 translate-x-1/3 opacity-60" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
-              <span className="inline-block px-4 py-1 bg-teal-50 text-cyan-700 rounded-full text-sm font-medium mb-4">
-                ABOUT US
-              </span>
-              <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
-                Making Healthcare
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-teal-600">
-                  Accessible for All
-                </span>
-              </h1>
-              <p className="text-xl text-gray-600 mb-8">
-                Founded on the belief that everyone deserves quality healthcare, 
-                TrueCare Health Network connects members with trusted providers 
-                at prices that make sense.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-teal-600 text-white font-semibold rounded-xl hover:from-cyan-600 hover:to-teal-700 transition-all shadow-lg shadow-cyan-500/25"
-                >
-                  Get in Touch
-                  <ArrowRight className="w-5 h-5" />
-                </Link>
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              <img
-                src="/medical-team.jpg"
-                alt="Our team"
-                className="rounded-3xl shadow-2xl"
-              />
-            </motion.div>
-          </div>
+      <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="max-w-3xl"
+          >
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/20 rounded-full text-blue-300 text-sm font-medium mb-6">
+              <Award className="w-4 h-4" />
+              About Solidarity Health Network
+            </span>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              Your Trusted Partner in
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400"> Total Benefits Solutions</span>
+            </h1>
+            <p className="text-xl text-blue-100">
+              Since 1989, we've been empowering organizations with comprehensive and innovative benefit packages that attract top talent and ensure workforce well-being.
+            </p>
+          </motion.div>
         </div>
       </section>
 
-      {/* Mission & Vision */}
+      {/* Mission */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12">
-            <div className="bg-gradient-to-br from-cyan-400 to-teal-600 rounded-2xl p-8 text-white">
-              <div className="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center mb-6">
-                <Target className="w-7 h-7 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
-              <p className="text-teal-100 text-lg">
-                To make quality healthcare accessible and affordable for everyone, 
-                connecting members with trusted providers through transparent pricing 
-                and exceptional service.
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-3xl font-bold text-slate-900 mb-6">Our Mission</h2>
+              <p className="text-lg text-slate-600 mb-6">
+                As a leading third-party administrator, benefits consultant, and full-service broker, we take pride in delivering a superior service model that empowers organizations with comprehensive and innovative benefit packages.
               </p>
-            </div>
-            <div className="bg-gradient-to-br from-slate-700 to-slate-800 rounded-2xl p-8 text-white">
-              <div className="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center mb-6">
-                <Lightbulb className="w-7 h-7 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4">Our Vision</h3>
-              <p className="text-slate-300 text-lg">
-                A future where healthcare decisions are driven by quality and value, 
-                not complexity and confusion. We envision a system where every 
-                person can access the care they need.
+              <p className="text-lg text-slate-600 mb-6">
+                Our mission is to provide personalized solutions that cater to the unique needs of each organization we serve. Through expert guidance, cutting-edge technology, and a focus on well-being, we strive to revolutionize the benefits experience.
               </p>
-            </div>
+              <p className="text-lg text-slate-600">
+                We help our clients attract and retain top talent while ensuring the well-being of their workforce – both during employment and after retirement.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="grid grid-cols-2 gap-6"
+            >
+              {[
+                { label: "Years Experience", value: "35+" },
+                { label: "Organizations", value: "500+" },
+                { label: "Members Served", value: "100K+" },
+                { label: "Client Retention", value: "99%" },
+              ].map((stat, i) => (
+                <div key={i} className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 text-center border border-blue-100">
+                  <p className="text-3xl font-bold text-blue-600">{stat.value}</p>
+                  <p className="text-slate-600">{stat.label}</p>
+                </div>
+              ))}
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Values */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <span className="inline-block px-4 py-1 bg-teal-50 text-cyan-700 rounded-full text-sm font-medium mb-4">
-              OUR VALUES
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              What Drives Us
-            </h2>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">Our Values</h2>
+            <p className="text-xl text-slate-600">The principles that guide everything we do</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                icon: Heart,
-                title: "Member First",
-                description: "Every decision starts with what's best for our members.",
-              },
-              {
-                icon: Shield,
-                title: "Integrity",
-                description: "Transparent pricing. Honest communication. No surprises.",
-              },
-              {
-                icon: Handshake,
-                title: "Partnership",
-                description: "Working alongside providers to deliver quality care.",
-              },
-              {
-                icon: TrendingUp,
-                title: "Innovation",
-                description: "Continuously improving the healthcare experience.",
-              },
-            ].map((value, i) => (
+            {values.map((value, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-lg transition-shadow"
+                className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100"
               >
-                <div className="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mb-4">
-                  <value.icon className="w-6 h-6 text-cyan-600" />
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center mb-4">
+                  <value.icon className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">{value.title}</h3>
-                <p className="text-gray-600">{value.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats */}
-      <section className="py-20 bg-gradient-to-br from-cyan-500 to-teal-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-white mb-4">Our Impact</h2>
-            <p className="text-teal-100 text-lg">Numbers that reflect our commitment to better healthcare.</p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { value: "500K+", label: "Members Served" },
-              { value: "50,000+", label: "Network Providers" },
-              { value: "$2B+", label: "Healthcare Savings" },
-              { value: "98%", label: "Member Satisfaction" },
-            ].map((stat, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="text-center"
-              >
-                <p className="text-4xl md:text-5xl font-bold text-white mb-2">{stat.value}</p>
-                <p className="text-teal-100">{stat.label}</p>
+                <h3 className="text-lg font-bold text-slate-900 mb-2">{value.title}</h3>
+                <p className="text-slate-600 text-sm">{value.description}</p>
               </motion.div>
             ))}
           </div>
@@ -189,53 +166,59 @@ export default function AboutPage() {
       {/* Leadership */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <span className="inline-block px-4 py-1 bg-teal-50 text-cyan-700 rounded-full text-sm font-medium mb-4">
-              LEADERSHIP
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Meet Our Team
-            </h2>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">Our Leadership</h2>
+            <p className="text-xl text-slate-600">Experienced professionals dedicated to your success</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Sarah Mitchell",
-                role: "Chief Executive Officer",
-                image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop",
-                bio: "20+ years in healthcare leadership, former VP at a major health system.",
-              },
-              {
-                name: "David Chen",
-                role: "Chief Medical Officer",
-                image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop",
-                bio: "Board-certified physician with expertise in healthcare innovation.",
-              },
-              {
-                name: "Maria Rodriguez",
-                role: "Chief Operations Officer",
-                image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400&h=400&fit=crop",
-                bio: "Former operations executive at a Fortune 500 healthcare company.",
-              },
-            ].map((leader, i) => (
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {leadership.map((leader, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-gray-50 rounded-2xl overflow-hidden"
+                className="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-8 border border-slate-200"
               >
-                <img
-                  src={leader.image}
-                  alt={leader.name}
-                  className="w-full h-64 object-cover"
-                />
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900">{leader.name}</h3>
-                  <p className="text-cyan-600 font-medium mb-3">{leader.role}</p>
-                  <p className="text-gray-600 text-sm">{leader.bio}</p>
+                <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                  <span className="text-2xl font-bold text-white">{leader.name.split(' ').map(n => n[0]).join('')}</span>
+                </div>
+                <div className="text-center">
+                  <h3 className="text-xl font-bold text-slate-900">{leader.name}</h3>
+                  <p className="text-blue-600 font-medium mb-4">{leader.role}</p>
+                  <p className="text-slate-600 text-sm">{leader.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Timeline */}
+      <section className="py-20 bg-slate-900 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Our Journey</h2>
+            <p className="text-xl text-blue-300">35+ years of serving organizations</p>
+          </div>
+
+          <div className="max-w-3xl mx-auto">
+            {milestones.map((milestone, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="flex items-start gap-6 mb-8"
+              >
+                <div className="w-20 shrink-0">
+                  <span className="text-xl font-bold text-blue-400">{milestone.year}</span>
+                </div>
+                <div className="flex-1 pb-8 border-l-2 border-blue-800 pl-6 relative">
+                  <div className="absolute left-[-9px] top-0 w-4 h-4 bg-blue-500 rounded-full border-4 border-slate-900"></div>
+                  <p className="text-white">{milestone.event}</p>
                 </div>
               </motion.div>
             ))}
@@ -244,29 +227,19 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gradient-to-r from-blue-600 to-cyan-600 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">
-            Ready to Join Our Network?
-          </h2>
-          <p className="text-xl text-gray-600 mb-10">
-            Whether you're a member, provider, or employer, we're here to help.
+          <h2 className="text-3xl font-bold mb-6">Ready to Partner with Us?</h2>
+          <p className="text-xl text-blue-100 mb-8">
+            Let's build a brighter future for your employees and your business together.
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-cyan-500 to-teal-600 text-white font-semibold rounded-xl hover:from-cyan-600 hover:to-teal-700 transition-all shadow-lg shadow-cyan-500/25"
-            >
-              Contact Us
-              <ArrowRight className="w-5 h-5" />
-            </Link>
-            <Link
-              href="/find-provider"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-gray-900 font-semibold border-2 border-gray-200 hover:border-teal-300 rounded-xl transition-all"
-            >
-              Find a Provider
-            </Link>
-          </div>
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-600 font-semibold rounded-xl hover:bg-blue-50 transition-all shadow-lg"
+          >
+            Contact Us Today
+            <ArrowRight className="w-5 h-5" />
+          </Link>
         </div>
       </section>
 
