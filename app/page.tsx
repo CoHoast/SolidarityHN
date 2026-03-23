@@ -83,9 +83,9 @@ const coreServices = [
 ];
 
 const sectors = [
-  { icon: HardHat, title: "Labor Unions", description: "Comprehensive benefit solutions for union members and their families.", image: "/medical-team-large.jpg" },
-  { icon: Building, title: "Commercial Sector", description: "Tailored corporate benefit packages for businesses of all sizes.", image: "/doctor-portrait-1.jpg" },
-  { icon: Scale, title: "Public Sector", description: "Specialized solutions for government and municipal employees.", image: "/doctor-portrait-2.jpg" },
+  { icon: HardHat, title: "Labor Unions", description: "Comprehensive benefit solutions for union members and their families.", image: "/labor-unions.jpg" },
+  { icon: Building, title: "Commercial Sector", description: "Tailored corporate benefit packages for businesses of all sizes.", image: "/commercial-sector.jpg" },
+  { icon: Scale, title: "Public Sector", description: "Specialized solutions for government and municipal employees.", image: "/public-sector.jpg" },
 ];
 
 const testimonials = [
