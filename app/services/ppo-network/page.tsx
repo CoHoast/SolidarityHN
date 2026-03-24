@@ -22,33 +22,33 @@ import {
 const features = [
   {
     icon: Users,
-    title: "50,000+ Contracted Providers",
-    description: "Access our extensive network of physicians, specialists, hospitals, and healthcare facilities across the country.",
+    title: "Provider Network Management",
+    description: "Build and manage your own provider network with comprehensive contracting, rate management, and provider relations tools.",
   },
   {
     icon: DollarSign,
-    title: "Pre-Negotiated Discount Rates",
-    description: "Save 25-35% on average with our pre-negotiated rates. No surprise bills, no balance billing from in-network providers.",
+    title: "Contract & Rate Management",
+    description: "Flexible rate structures: % of billed, % of Medicare, fee schedules, case rates, and per diem. All centrally managed.",
   },
   {
     icon: Shield,
-    title: "Provider Credentialing",
-    description: "All network providers are thoroughly credentialed and verified for licenses, certifications, and quality standards.",
+    title: "Automated Credentialing",
+    description: "Real-time verification via NPPES, OIG exclusion checks, SAM.gov, and license validation. Re-credentialing reminders built in.",
   },
   {
     icon: BarChart3,
     title: "Network Analytics & Reporting",
-    description: "Comprehensive analytics on network utilization, cost savings, and provider performance to optimize your benefit spend.",
+    description: "Comprehensive analytics on network utilization, cost savings, contract health, and provider performance metrics.",
   },
   {
     icon: MapPin,
     title: "Geographic Coverage Analysis",
-    description: "Ensure adequate provider access for all your members with detailed geographic coverage analysis and gap identification.",
+    description: "Ensure adequate provider access for all your members with detailed coverage analysis and gap identification by specialty.",
   },
   {
     icon: Search,
-    title: "Provider Directory Management",
-    description: "Easy-to-use online provider directory with real-time updates, accepting new patient status, and location-based search.",
+    title: "Provider Directory & Portal",
+    description: "Public provider search directory plus self-service provider portal for credentialing updates and contract management.",
   },
 ];
 
@@ -60,14 +60,14 @@ const stats = [
 ];
 
 const benefits = [
-  "Significant cost savings on medical services",
-  "No balance billing from in-network providers",
-  "Quality-vetted and credentialed providers",
-  "Nationwide coverage for mobile workforces",
-  "Easy online provider search and directory",
-  "Real-time eligibility verification",
-  "Seamless claims processing",
-  "Dedicated provider relations team",
+  "Build your own network vs. paying $5 PMPM rental",
+  "Manage client networks as a service offering",
+  "Automated credentialing and re-credentialing",
+  "Flexible contract rate structures",
+  "Public provider directory with search",
+  "Provider self-service portal",
+  "OIG/SAM exclusion monitoring",
+  "White-label ready for your brand",
 ];
 
 export default function PPONetworkPage() {
@@ -99,7 +99,7 @@ export default function PPONetworkPage() {
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-teal-400"> Services</span>
             </h1>
             <p className="text-xl text-blue-100">
-              Access our extensive network of 50,000+ contracted providers with pre-negotiated rates, delivering significant savings while ensuring quality care for your members.
+              Stop renting networks at $5 PMPM. Build, manage, and grow your own provider network with our enterprise-grade platform — or let us manage it for you.
             </p>
           </motion.div>
         </div>
@@ -135,12 +135,12 @@ export default function PPONetworkPage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl font-bold text-slate-900 mb-6">Nationwide Provider Access</h2>
+              <h2 className="text-3xl font-bold text-slate-900 mb-6">Own Your Network. Stop Renting.</h2>
               <p className="text-lg text-slate-600 mb-6">
-                Our PPO network gives your members access to quality healthcare at discounted rates across all 50 states. With pre-negotiated contracts, you'll save 25-35% on average compared to out-of-network costs.
+                Most TPAs pay <strong>$5 PMPM</strong> to rent access to PPO networks they don't control. With our platform, you can build, manage, and grow your own provider network — turning a cost center into a revenue stream.
               </p>
               <p className="text-lg text-slate-600 mb-8">
-                Every provider in our network is thoroughly credentialed and monitored for quality. Your members can trust they're receiving care from verified, qualified healthcare professionals.
+                Our enterprise-grade platform handles provider contracting, credentialing, rate management, and compliance. Whether you're managing a client's network or building your own to rent to others, we provide the tools you need.
               </p>
               <div className="grid sm:grid-cols-2 gap-4">
                 {benefits.map((benefit, i) => (
@@ -225,9 +225,9 @@ export default function PPONetworkPage() {
       {/* CTA */}
       <section className="py-20 bg-gradient-to-r from-cyan-600 to-teal-600 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-6">Ready to Access Our PPO Network?</h2>
+          <h2 className="text-3xl font-bold mb-6">Ready to Own Your Network?</h2>
           <p className="text-xl text-cyan-100 mb-8">
-            Start saving 25-35% on healthcare costs with access to 50,000+ quality providers.
+            Stop paying rental fees. Build your own PPO network or let us manage it for you.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
