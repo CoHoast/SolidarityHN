@@ -27,7 +27,7 @@ const features = [
   },
   {
     icon: DollarSign,
-    title: "2-Horseman Pricing Intelligence",
+    title: "Pricing Intelligence",
     description: "Fair prices calculated using Medicare rates (19,226 CPT codes) and hospital transparency data (869K prices across 184 hospitals).",
   },
   {
@@ -163,7 +163,7 @@ export default function AIBillNegotiationPage() {
                 High-value medical claims — hospital charges, surgeries, specialist care, ER visits, and imaging — are often billed at 3-10x fair market rates. Our AI-powered system handles these complex negotiations autonomously.
               </p>
               <p className="text-lg text-slate-600 mb-8">
-                Our "2-Horseman" pricing intelligence combines <strong>Medicare rates</strong> (19,226 CPT codes) with <strong>hospital transparency data</strong> (869,000 prices across 184 hospitals) to calculate defensible fair prices that providers respect.
+                Our pricing intelligence combines <strong>Medicare rates</strong> (19,226 CPT codes) with <strong>hospital transparency data</strong> (869,000 prices across 184 hospitals) to calculate defensible fair prices that providers respect.
               </p>
               <div className="grid sm:grid-cols-2 gap-4">
                 {benefits.map((benefit, i) => (
