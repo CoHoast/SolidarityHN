@@ -27,13 +27,13 @@ const features = [
   },
   {
     icon: DollarSign,
-    title: "Medicare-Based Fair Pricing",
-    description: "We calculate fair prices using Medicare rates and market data, ensuring you never overpay for medical services.",
+    title: "2-Horseman Pricing Intelligence",
+    description: "Fair prices calculated using Medicare rates (19,226 CPT codes) and hospital transparency data (869K prices across 184 hospitals).",
   },
   {
     icon: MessageSquare,
-    title: "Automated Provider Negotiation",
-    description: "Our AI conducts negotiations with providers on your behalf, reaching settlements quickly and efficiently.",
+    title: "Automated Provider Outreach",
+    description: "Smart routing sends offers via email (SES) or fax (Sinch) automatically. Manual queue for providers without contact info.",
   },
   {
     icon: Clock,
@@ -47,8 +47,8 @@ const features = [
   },
   {
     icon: Shield,
-    title: "Appeals Management",
-    description: "When initial negotiations aren't successful, our AI escalates to appeals with additional supporting data.",
+    title: "Tiered Negotiation Strategy",
+    description: "Multi-round approach: friendly offer → methodology explanation → firm position → NSA regulatory education if needed.",
   },
 ];
 
@@ -62,23 +62,23 @@ const stats = [
 const process = [
   {
     step: "01",
-    title: "Bill Submission",
-    description: "Upload medical bills through our secure portal. Our AI instantly begins analysis.",
+    title: "Bill Import",
+    description: "High-value claims (hospital charges, surgeries, ER visits, imaging) are imported via MCO flat file or secure upload.",
   },
   {
     step: "02",
-    title: "AI Analysis",
-    description: "AI identifies overcharges, calculates fair prices using Medicare rates, and determines negotiation strategy.",
+    title: "Fair Price Calculation",
+    description: "AI calculates fair price using Medicare rates + hospital transparency data. Auto-routes based on provider contact info.",
   },
   {
     step: "03",
-    title: "Provider Negotiation",
-    description: "Automated outreach to providers with fair price offers backed by market data.",
+    title: "Tiered Negotiation",
+    description: "Round 1: Payment Offer → Round 2: Methodology → Round 3: Firm Position → Final: NSA Regulatory Reference.",
   },
   {
     step: "04",
     title: "Settlement",
-    description: "Negotiated settlement reached, documented, and savings applied to your account.",
+    description: "Provider accepts via portal, settlement documented, savings applied. Average 40-60% reduction achieved.",
   },
 ];
 
@@ -160,10 +160,10 @@ export default function AIBillNegotiationPage() {
             >
               <h2 className="text-3xl font-bold text-slate-900 mb-6">Intelligent Cost Reduction</h2>
               <p className="text-lg text-slate-600 mb-6">
-                Medical bills are often inflated, contain errors, or charge far above fair market rates. Our AI-powered bill negotiation service analyzes every bill, identifies opportunities for savings, and negotiates with providers on your behalf.
+                High-value medical claims — hospital charges, surgeries, specialist care, ER visits, and imaging — are often billed at 3-10x fair market rates. Our AI-powered system handles these complex negotiations autonomously.
               </p>
               <p className="text-lg text-slate-600 mb-8">
-                Using Medicare rates and comprehensive market data, we calculate what a fair price should be and negotiate settlements that typically save 40-60% on out-of-network claims.
+                Our "2-Horseman" pricing intelligence combines <strong>Medicare rates</strong> (19,226 CPT codes) with <strong>hospital transparency data</strong> (869,000 prices across 184 hospitals) to calculate defensible fair prices that providers respect.
               </p>
               <div className="grid sm:grid-cols-2 gap-4">
                 {benefits.map((benefit, i) => (
