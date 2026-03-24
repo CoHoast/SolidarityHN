@@ -33,7 +33,7 @@ const features = [
   {
     icon: MessageSquare,
     title: "Automated Provider Outreach",
-    description: "Smart routing sends offers via email (SES) or fax (Sinch) automatically. Manual queue for providers without contact info.",
+    description: "Smart routing sends offers via email or fax automatically, with manual handling for special cases.",
   },
   {
     icon: Clock,
@@ -62,23 +62,23 @@ const stats = [
 const process = [
   {
     step: "01",
-    title: "Bill Import",
-    description: "High-value claims (hospital charges, surgeries, ER visits, imaging) are imported via MCO flat file or secure upload.",
+    title: "Bill Submission",
+    description: "Submit medical bills through our secure portal for AI-powered analysis.",
   },
   {
     step: "02",
     title: "Fair Price Calculation",
-    description: "AI calculates fair price using Medicare rates + hospital transparency data. Auto-routes based on provider contact info.",
+    description: "Our AI determines the fair market price using comprehensive pricing data.",
   },
   {
     step: "03",
-    title: "Tiered Negotiation",
-    description: "Round 1: Payment Offer → Round 2: Methodology → Round 3: Firm Position → Final: NSA Regulatory Reference.",
+    title: "Provider Negotiation",
+    description: "Automated outreach to providers with data-backed fair price offers.",
   },
   {
     step: "04",
     title: "Settlement",
-    description: "Provider accepts via portal, settlement documented, savings applied. Average 40-60% reduction achieved.",
+    description: "Settlement reached, documented, and savings applied to your account.",
   },
 ];
 
