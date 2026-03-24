@@ -168,22 +168,38 @@ export default function ImpactPage() {
       {/* Key Metrics */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {impactStats.map((stat, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="text-center p-8 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl border border-blue-100"
-              >
-                <stat.icon className="w-10 h-10 text-blue-600 mx-auto mb-4" />
-                <p className="text-4xl font-bold text-blue-600 mb-2">{stat.value}</p>
-                <p className="font-semibold text-slate-900 mb-1">{stat.label}</p>
-                <p className="text-sm text-slate-600">{stat.description}</p>
-              </motion.div>
-            ))}
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Stats Grid */}
+            <div className="grid sm:grid-cols-2 gap-6">
+              {impactStats.map((stat, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="text-center p-6 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl border border-blue-100"
+                >
+                  <stat.icon className="w-8 h-8 text-blue-600 mx-auto mb-3" />
+                  <p className="text-3xl font-bold text-blue-600 mb-1">{stat.value}</p>
+                  <p className="font-semibold text-slate-900 text-sm mb-1">{stat.label}</p>
+                  <p className="text-xs text-slate-600">{stat.description}</p>
+                </motion.div>
+              ))}
+            </div>
+            {/* Image */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="rounded-2xl overflow-hidden shadow-xl"
+            >
+              <img 
+                src="/medical-team.jpg" 
+                alt="Our dedicated team delivering results"
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
           </div>
         </div>
       </section>

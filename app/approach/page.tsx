@@ -24,21 +24,25 @@ const principles = [
     icon: Compass,
     title: "Expert Guidance",
     description: "Navigating the ever-changing landscape of employee benefits can be overwhelming. That's why our team of experienced benefits consultants is here to guide you through every step of the process. From plan design and implementation to ongoing support and strategic planning, we are your trusted advisors, providing valuable insights to help you make informed decisions.",
+    image: "/doctors-consulting.jpg",
   },
   {
     icon: Users,
     title: "Personalized Solutions",
     description: "No two organizations are the same, and we recognize the importance of tailoring our solutions to fit your specific requirements. Our team takes the time to understand your company's culture, workforce demographics, and budget constraints, allowing us to craft personalized benefit plans that resonate with your employees and align with your business objectives.",
+    image: "/doctor-patient-consult.jpg",
   },
   {
     icon: Zap,
     title: "Technology-Driven Efficiency",
     description: "We leverage cutting-edge technology and streamlined processes to enhance the efficiency of benefits administration. Our user-friendly online platforms make it easy for employees to access and manage their benefits, simplifying enrollment and claims processing for HR teams.",
+    image: "/doctor-tablet.jpg",
   },
   {
     icon: Heart,
     title: "Focus on Employee Well-Being",
     description: "Employee well-being is at the heart of what we do. We strive to provide benefit packages that go beyond traditional healthcare coverage, encompassing wellness programs and resources to promote a healthy and active workforce and engaged retirees.",
+    image: "/happy-family.jpg",
   },
 ];
 
@@ -132,10 +136,12 @@ export default function ApproachPage() {
                   <h3 className="text-2xl font-bold text-slate-900 mb-4">{principle.title}</h3>
                   <p className="text-lg text-slate-600">{principle.description}</p>
                 </div>
-                <div className={`bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-8 ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
-                  <div className="flex items-center justify-center h-48">
-                    <principle.icon className="w-32 h-32 text-blue-200" />
-                  </div>
+                <div className={`rounded-2xl overflow-hidden shadow-xl ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
+                  <img 
+                    src={principle.image} 
+                    alt={principle.title}
+                    className="w-full h-64 object-cover"
+                  />
                 </div>
               </motion.div>
             ))}
